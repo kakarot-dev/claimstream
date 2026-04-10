@@ -13,7 +13,9 @@ import json
 import numpy as np
 from pathlib import Path
 from faster_whisper import WhisperModel
-from sentence_transformers import SentenceTransformer, CrossEncoder
+from sentence_transformers import SentenceTransformer
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
 
 
 # ============================================================
@@ -47,7 +49,7 @@ class Transcriber:
 
 # Pre-trained models from HuggingFace — no fine-tuning needed
 RETRIEVAL_MODEL = "all-MiniLM-L6-v2"
-NLI_MODEL = "cross-encoder/nli-deberta-v3-small"
+NLI_MODEL = "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
 
 
 class FactChecker:
@@ -65,7 +67,7 @@ class FactChecker:
     The NLI model catches the contradiction.
     """
 
-    def __init__(self, dataset_path: str = "data/space_facts.json", threshold: float = 0.45):
+    def __init__(self, dataset_path: str = "data/facts.json", threshold: float = 0.6):
         self.threshold = threshold
 
         # Stage 1: Retrieval model
@@ -77,28 +79,44 @@ class FactChecker:
         self.facts = self._load_dataset(dataset_path)
         print(f"  {len(self.facts)} facts loaded")
 
-        # Pre-encode all facts for fast similarity search
-        print(f"  Encoding fact embeddings...")
-        claims = [f["claim"] for f in self.facts]
-        self.embeddings = self.retriever.encode(claims, normalize_embeddings=True, show_progress_bar=True)
+        # Pre-encode all facts (cached to disk after first run)
+        cache_path = Path(dataset_path).with_suffix(".npy")
+        if cache_path.exists() and cache_path.stat().st_mtime > Path(dataset_path).stat().st_mtime:
+            print(f"  Loading cached embeddings from {cache_path}")
+            self.embeddings = np.load(str(cache_path))
+            print(f"  {self.embeddings.shape[0]} embeddings loaded from cache")
+        else:
+            print(f"  Encoding {len(self.facts)} fact embeddings (first run, will be cached)...")
+            claims = [f["claim"] for f in self.facts]
+            self.embeddings = self.retriever.encode(claims, normalize_embeddings=True, show_progress_bar=True, batch_size=256)
+            np.save(str(cache_path), self.embeddings)
+            print(f"  Embeddings cached to {cache_path}")
 
         # Stage 2: NLI model (trained on MNLI + FEVER + ANLI)
         print(f"  Loading NLI model: {NLI_MODEL}")
-        self.nli = CrossEncoder(NLI_MODEL)
+        self.nli_tokenizer = AutoTokenizer.from_pretrained(NLI_MODEL)
+        self.nli_model = AutoModelForSequenceClassification.from_pretrained(NLI_MODEL)
+        self.nli_model.eval()
         print(f"  Fact checker ready. (threshold={self.threshold})")
 
     def _load_dataset(self, path: str) -> list[dict]:
         with open(Path(path)) as f:
             return json.load(f)["facts"]
 
-    def _get_nli_label(self, scores) -> tuple[int, float]:
-        """Get NLI label and confidence from model output.
+    def _nli_predict(self, premise: str, hypothesis: str) -> tuple[str, float]:
+        """Run NLI inference. Returns (label, confidence).
 
-        cross-encoder/nli-deberta-v3-small outputs: [contradiction, entailment, neutral]
+        MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli:
+        Labels: {entailment: 0, neutral: 1, contradiction: 2}
         """
-        label = int(np.argmax(scores))
-        conf = float(scores[label])
-        return label, conf
+        inputs = self.nli_tokenizer(premise, hypothesis, return_tensors="pt", truncation=True, max_length=256)
+        with torch.no_grad():
+            logits = self.nli_model(**inputs).logits
+        probs = torch.softmax(logits, dim=-1)[0].numpy()
+        label_idx = int(np.argmax(probs))
+        conf = float(probs[label_idx])
+        labels = ["entailment", "neutral", "contradiction"]
+        return labels[label_idx], conf
 
     def check(self, claim: str) -> dict:
         """Fact-check a single claim.
@@ -131,11 +149,9 @@ class FactChecker:
                 break
 
             fact = self.facts[idx]
-            scores = self.nli.predict([(claim, fact["claim"])])[0]
-            label, conf = self._get_nli_label(scores)
+            label, conf = self._nli_predict(claim, fact["claim"])
 
-            # Labels: 0=contradiction, 1=entailment, 2=neutral
-            if label == 2:
+            if label == "neutral":
                 continue  # skip neutral
 
             combined = sim * 0.4 + conf * 0.6
@@ -154,7 +170,7 @@ class FactChecker:
             }
 
         fact = best["fact"]
-        is_entailment = (best["label"] == 1)
+        is_entailment = (best["label"] == "entailment")
         fact_true = fact["verdict"]
 
         # Logic matrix:
