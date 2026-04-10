@@ -1,0 +1,97 @@
+============================================================
+ConvoAI — Space Debate Fact Checker — Example Output
+============================================================
+
+System startup:
+  [1/2] Loading Whisper 'small' model... done.
+  [2/2] Loading Sentence-Transformer + 9,747 facts... done.
+
+--- Debate: Team Alpha vs Team Beta ---
+
+SIDE A (Team Alpha) — Turn 1:
+
+  Claim: "Mercury is the smallest planet in the solar system"
+  Status: SUPPORTED (confidence: 0.92)
+  Matched: "Mercury is the smallest planet in the solar system"
+  Source: NASA Mercury Fact Sheet
+
+  Claim: "Jupiter has about 95 known moons"
+  Status: SUPPORTED (confidence: 0.88)
+  Matched: "Jupiter has at least 95 known moons"
+  Source: NASA JPL
+
+  Claim: "The Sun is the biggest star in the universe"
+  Status: REFUTED (confidence: 0.87)
+  Correction: The Sun is a medium-sized star. Many stars are far larger.
+  Source: NASA
+
+  Claim: "Venus is the hottest planet due to its greenhouse effect"
+  Status: SUPPORTED (confidence: 0.91)
+  Matched: "Venus is the hottest planet due to its thick atmosphere..."
+  Source: NASA Planetary Science
+
+Team Alpha Summary:
+  Total claims: 4
+  Supported: 3
+  Refuted: 1
+  Unverifiable: 0
+  Accuracy: 75.0%
+
+SIDE B (Team Beta) — Turn 2:
+
+  Claim: "Humans have never landed on the Moon"
+  Status: REFUTED (confidence: 0.94)
+  Correction: Humans have landed on the Moon six times during the Apollo program.
+  Source: NASA Apollo Program
+
+  Claim: "The universe is approximately 13.8 billion years old"
+  Status: SUPPORTED (confidence: 0.93)
+  Matched: "The universe is approximately 13.8 billion years old..."
+  Source: NASA Planck Mission
+
+  Claim: "Black holes suck in everything around them"
+  Status: REFUTED (confidence: 0.85)
+  Correction: Black holes do not suck things in. They have the same gravitational
+  pull as any object of the same mass.
+  Source: NASA
+
+  Claim: "The Voyager 1 spacecraft has entered interstellar space"
+  Status: SUPPORTED (confidence: 0.89)
+  Matched: "Voyager 1 is the farthest human-made object from Earth..."
+  Source: NASA JPL Voyager
+
+Team Beta Summary:
+  Total claims: 4
+  Supported: 2
+  Refuted: 2
+  Unverifiable: 0
+  Accuracy: 50.0%
+
+--- DEBATE RESULT ---
+
+  Winner: Team Alpha (75.0% accuracy vs 50.0%)
+
+  Team Alpha incorrect claims:
+    - "The Sun is the biggest star in the universe"
+      → The Sun is a medium-sized star.
+
+  Team Beta incorrect claims:
+    - "Humans have never landed on the Moon"
+      → Apollo program landed 12 astronauts across 6 missions.
+    - "Black holes suck in everything around them"
+      → Black holes have normal gravitational pull for their mass.
+
+============================================================
+Dataset Statistics:
+  Total facts: 9,747
+  True facts: 7,418
+  False facts (misconceptions): 2,329
+  Categories: 12 (planets, stars, moons, cosmology, space_exploration, etc.)
+  Source: FEVER dataset (Wikipedia-verified claims)
+
+Model Performance (after fine-tuning):
+  Pearson cosine similarity: 0.984
+  Spearman correlation: 0.940
+  Training pairs: 8,099
+  Training time: ~19 minutes (CPU)
+============================================================

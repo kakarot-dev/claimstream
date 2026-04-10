@@ -1,0 +1,3225 @@
+{
+  "domain": "space_and_astronomy",
+  "description": "Curated space and astronomy facts for debate fact-checking. Includes verified facts and common misconceptions.",
+  "facts": [
+    {
+      "claim": "The Sun is a medium-sized yellow dwarf star classified as a G-type main-sequence star",
+      "verdict": true,
+      "source": "NASA Solar Science",
+      "category": "stars"
+    },
+    {
+      "claim": "The Sun is the largest star in the Milky Way galaxy",
+      "verdict": false,
+      "correction": "The Sun is a relatively small star. Stars like UY Scuti and Betelgeuse are far larger.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Light from the Sun takes approximately 8 minutes and 20 seconds to reach Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The Sun accounts for about 99.86 percent of the total mass of the solar system",
+      "verdict": true,
+      "source": "NASA Solar System Exploration",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Mercury is the hottest planet in the solar system because it is closest to the Sun",
+      "verdict": false,
+      "correction": "Venus is the hottest planet due to its thick atmosphere and greenhouse effect, despite being farther from the Sun than Mercury.",
+      "source": "NASA Planetary Science",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus rotates in the opposite direction to most other planets, meaning the Sun rises in the west on Venus",
+      "verdict": true,
+      "source": "NASA Venus Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "A day on Venus is longer than a year on Venus",
+      "verdict": true,
+      "source": "NASA Venus Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus has a thick atmosphere composed mainly of carbon dioxide with clouds of sulfuric acid",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is known as the Red Planet because of iron oxide or rust on its surface",
+      "verdict": true,
+      "source": "NASA Mars Exploration",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has two small moons named Phobos and Deimos",
+      "verdict": true,
+      "source": "NASA Mars Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Olympus Mons on Mars is the tallest known volcano and mountain in the solar system at about 21.9 kilometers high",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has a similar atmospheric pressure to Earth making it relatively easy to breathe there",
+      "verdict": false,
+      "correction": "Mars has less than 1% of Earth's atmospheric pressure, and its atmosphere is 95% carbon dioxide. Humans cannot breathe there without life support.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is the largest planet in the solar system with a mass more than twice that of all other planets combined",
+      "verdict": true,
+      "source": "NASA Jupiter Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter's Great Red Spot is a massive storm that has been raging for at least 350 years",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has at least 95 known moons",
+      "verdict": true,
+      "source": "NASA JPL",
+      "category": "planets"
+    },
+    {
+      "claim": "Europa, one of Jupiter's moons, likely has a subsurface ocean of liquid water beneath its icy crust",
+      "verdict": true,
+      "source": "NASA Europa Clipper Mission",
+      "category": "moons"
+    },
+    {
+      "claim": "Saturn is the only planet in the solar system with rings",
+      "verdict": false,
+      "correction": "Jupiter, Uranus, and Neptune also have ring systems, though Saturn's are the most prominent and visible.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is less dense than water and could theoretically float if placed in a large enough body of water",
+      "verdict": true,
+      "source": "NASA Saturn Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn's moon Titan has a thick atmosphere and liquid methane lakes on its surface",
+      "verdict": true,
+      "source": "NASA Cassini Mission",
+      "category": "moons"
+    },
+    {
+      "claim": "Titan is the only moon in the solar system known to have a dense atmosphere",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Uranus rotates on its side with an axial tilt of about 98 degrees",
+      "verdict": true,
+      "source": "NASA Uranus Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has the strongest sustained winds of any planet in the solar system reaching up to 2100 kilometers per hour",
+      "verdict": true,
+      "source": "NASA Neptune Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Pluto is classified as a dwarf planet since its reclassification by the IAU in 2006",
+      "verdict": true,
+      "source": "International Astronomical Union",
+      "category": "dwarf_planets"
+    },
+    {
+      "claim": "Pluto is smaller than Earth's Moon",
+      "verdict": true,
+      "source": "NASA",
+      "category": "dwarf_planets"
+    },
+    {
+      "claim": "The Moon is slowly moving away from Earth at a rate of about 3.8 centimeters per year",
+      "verdict": true,
+      "source": "NASA Lunar Science",
+      "category": "moons"
+    },
+    {
+      "claim": "The dark side of the Moon is always dark and never receives sunlight",
+      "verdict": false,
+      "correction": "The far side of the Moon receives just as much sunlight as the near side. It is called the far side because it always faces away from Earth, not because it is dark.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "The Moon has no atmosphere at all",
+      "verdict": false,
+      "correction": "The Moon has an extremely thin atmosphere called an exosphere, composed of helium, neon, and argon, but it is so thin it is nearly a vacuum.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "The Asteroid Belt between Mars and Jupiter contains millions of asteroids",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The Asteroid Belt is so densely packed that spacecraft have to carefully navigate through it",
+      "verdict": false,
+      "correction": "The Asteroid Belt is mostly empty space. The average distance between asteroids is about 1 million kilometers. Spacecraft pass through it without any special navigation.",
+      "source": "NASA JPL",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The Kuiper Belt is a region of icy bodies beyond Neptune's orbit that includes Pluto",
+      "verdict": true,
+      "source": "NASA Solar System Exploration",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The Oort Cloud is a hypothesized spherical cloud of icy objects surrounding the solar system at a distance of up to 100,000 AU",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Comets are composed of ice, dust, and rocky material, often described as dirty snowballs",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Halley's Comet is visible from Earth approximately every 75 to 79 years",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The speed of light in a vacuum is approximately 299,792 kilometers per second",
+      "verdict": true,
+      "source": "NIST",
+      "category": "physics"
+    },
+    {
+      "claim": "Nothing can travel faster than the speed of light according to Einstein's theory of special relativity",
+      "verdict": true,
+      "source": "Einstein's Special Relativity",
+      "category": "physics"
+    },
+    {
+      "claim": "A light-year is a unit of time equal to one year at the speed of light",
+      "verdict": false,
+      "correction": "A light-year is a unit of distance, not time. It is the distance that light travels in one year, approximately 9.46 trillion kilometers.",
+      "source": "IAU",
+      "category": "physics"
+    },
+    {
+      "claim": "The Milky Way galaxy is a barred spiral galaxy approximately 100,000 light-years in diameter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "galaxies"
+    },
+    {
+      "claim": "The Milky Way contains an estimated 100 to 400 billion stars",
+      "verdict": true,
+      "source": "NASA",
+      "category": "galaxies"
+    },
+    {
+      "claim": "The supermassive black hole at the center of the Milky Way is called Sagittarius A-star",
+      "verdict": true,
+      "source": "Event Horizon Telescope Collaboration",
+      "category": "galaxies"
+    },
+    {
+      "claim": "The Andromeda Galaxy is the nearest major galaxy to the Milky Way at about 2.5 million light-years away",
+      "verdict": true,
+      "source": "NASA",
+      "category": "galaxies"
+    },
+    {
+      "claim": "The Milky Way and Andromeda Galaxy are expected to collide in about 4.5 billion years",
+      "verdict": true,
+      "source": "NASA Hubble Space Telescope",
+      "category": "galaxies"
+    },
+    {
+      "claim": "There are approximately 2 trillion galaxies in the observable universe",
+      "verdict": true,
+      "source": "Conselice et al. 2016, Astrophysical Journal",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The observable universe is approximately 93 billion light-years in diameter",
+      "verdict": true,
+      "source": "NASA WMAP",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The universe is approximately 13.8 billion years old based on observations of the cosmic microwave background",
+      "verdict": true,
+      "source": "NASA Planck Mission",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The Big Bang theory states that the universe began as an explosion in empty space",
+      "verdict": false,
+      "correction": "The Big Bang was not an explosion in space. It was the rapid expansion of space itself from an extremely hot and dense state. There was no pre-existing empty space for it to explode into.",
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Dark matter makes up about 27 percent of the universe while dark energy makes up about 68 percent",
+      "verdict": true,
+      "source": "NASA Planck Mission",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Ordinary visible matter makes up only about 5 percent of the total content of the universe",
+      "verdict": true,
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The cosmic microwave background radiation is the afterglow of the Big Bang detectable in every direction in space",
+      "verdict": true,
+      "source": "NASA COBE/WMAP/Planck",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The universe is expanding and the rate of expansion is accelerating",
+      "verdict": true,
+      "source": "Nobel Prize in Physics 2011, Perlmutter, Schmidt, Riess",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Black holes are objects so dense that nothing, not even light, can escape their gravitational pull once past the event horizon",
+      "verdict": true,
+      "source": "NASA",
+      "category": "black_holes"
+    },
+    {
+      "claim": "Black holes suck in everything around them like cosmic vacuum cleaners",
+      "verdict": false,
+      "correction": "Black holes do not suck things in. They have the same gravitational pull as any object of the same mass. Objects must cross the event horizon to be trapped. The Sun replaced by a same-mass black hole would not pull the planets in.",
+      "source": "NASA",
+      "category": "black_holes"
+    },
+    {
+      "claim": "Stellar black holes form when massive stars collapse at the end of their life cycle",
+      "verdict": true,
+      "source": "NASA",
+      "category": "black_holes"
+    },
+    {
+      "claim": "The first image of a black hole shadow was captured in 2019 showing the supermassive black hole in galaxy M87",
+      "verdict": true,
+      "source": "Event Horizon Telescope Collaboration",
+      "category": "black_holes"
+    },
+    {
+      "claim": "Neutron stars are the densest known objects in the universe, with a teaspoon of neutron star material weighing about 6 billion tons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "A supernova is the explosive death of a massive star and can briefly outshine an entire galaxy",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "All stars eventually become black holes when they die",
+      "verdict": false,
+      "correction": "Only the most massive stars become black holes. Medium-mass stars become white dwarfs, and somewhat larger stars become neutron stars. Our Sun will become a white dwarf.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Red dwarf stars are the most common type of star in the Milky Way",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Stars twinkle because of turbulence in Earth's atmosphere, not because of any property of the stars themselves",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The North Star Polaris is the brightest star in the night sky",
+      "verdict": false,
+      "correction": "Sirius is the brightest star in the night sky. Polaris is only about the 50th brightest star, but it is important for navigation because it is very close to the north celestial pole.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Betelgeuse is a red supergiant star in the constellation Orion that is expected to explode as a supernova within the next million years",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The International Space Station orbits Earth at an altitude of approximately 400 kilometers",
+      "verdict": true,
+      "source": "NASA ISS",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The ISS travels at approximately 28,000 kilometers per hour and completes one orbit of Earth roughly every 90 minutes",
+      "verdict": true,
+      "source": "NASA ISS",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Apollo 11 mission in 1969 was the first to land humans on the Moon with Neil Armstrong and Buzz Aldrin",
+      "verdict": true,
+      "source": "NASA Apollo Program",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "There have been six successful crewed Moon landings all part of the NASA Apollo program",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Yuri Gagarin was the first human in space aboard Vostok 1 on April 12, 1961",
+      "verdict": true,
+      "source": "NASA History",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Valentina Tereshkova was the first woman in space aboard Vostok 6 in 1963",
+      "verdict": true,
+      "source": "NASA History",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Hubble Space Telescope was launched in 1990 and orbits Earth at about 547 kilometers altitude",
+      "verdict": true,
+      "source": "NASA Hubble",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The James Webb Space Telescope launched in December 2021 and orbits the Sun at the L2 Lagrange point about 1.5 million kilometers from Earth",
+      "verdict": true,
+      "source": "NASA JWST",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Voyager 1 is the farthest human-made object from Earth, having entered interstellar space in 2012",
+      "verdict": true,
+      "source": "NASA JPL Voyager",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Voyager 1 carries a Golden Record containing sounds and images of Earth intended for any extraterrestrial life that might find it",
+      "verdict": true,
+      "source": "NASA JPL",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Space Shuttle program ran from 1981 to 2011 with 135 missions",
+      "verdict": true,
+      "source": "NASA Space Shuttle Program",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "SpaceX's Falcon 9 was the first orbital-class rocket to successfully land and be reused",
+      "verdict": true,
+      "source": "SpaceX",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Mars Perseverance rover landed on Mars in February 2021 and carried the Ingenuity helicopter",
+      "verdict": true,
+      "source": "NASA Mars 2020",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Ingenuity was the first powered controlled flight on another planet",
+      "verdict": true,
+      "source": "NASA JPL",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "There is no gravity in space or on the International Space Station",
+      "verdict": false,
+      "correction": "Gravity exists everywhere in space. Astronauts on the ISS experience microgravity because they are in continuous freefall around Earth, not because there is no gravity. Gravity at ISS altitude is about 90% of surface gravity.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Great Wall of China is visible from space with the naked eye",
+      "verdict": false,
+      "correction": "The Great Wall of China is not visible from low Earth orbit with the naked eye. It is too narrow. This is a common myth that has been debunked by multiple astronauts.",
+      "source": "NASA, ISS astronauts",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "In space, without a spacesuit, a human would instantly freeze",
+      "verdict": false,
+      "correction": "Space is a vacuum with very poor heat transfer. A human would not instantly freeze. The main dangers are lack of oxygen, ebullism (body fluids boiling at low pressure), and decompression. Freezing would take a long time.",
+      "source": "NASA",
+      "category": "physics"
+    },
+    {
+      "claim": "Sound cannot travel through the vacuum of space because there are no molecules to carry sound waves",
+      "verdict": true,
+      "source": "NASA",
+      "category": "physics"
+    },
+    {
+      "claim": "Earth's atmosphere protects us from most meteoroids which burn up as meteors before reaching the surface",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The largest known structure in the universe is the Hercules-Corona Borealis Great Wall at about 10 billion light-years across",
+      "verdict": true,
+      "source": "Horvath et al. 2014",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Exoplanets are planets that orbit stars outside our solar system and thousands have been confirmed",
+      "verdict": true,
+      "source": "NASA Exoplanet Archive",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "The first exoplanet orbiting a Sun-like star was 51 Pegasi b discovered in 1995",
+      "verdict": true,
+      "source": "Nobel Prize in Physics 2019",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "The TRAPPIST-1 system contains seven Earth-sized rocky planets, three of which are in the habitable zone",
+      "verdict": true,
+      "source": "NASA",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "The habitable zone is the region around a star where conditions might allow liquid water to exist on a planet's surface",
+      "verdict": true,
+      "source": "NASA",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "Proxima Centauri b is the closest known exoplanet to Earth orbiting the nearest star to the Sun at about 4.24 light-years away",
+      "verdict": true,
+      "source": "ESO",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "The Kepler Space Telescope discovered the majority of known exoplanets before being retired in 2018",
+      "verdict": true,
+      "source": "NASA Kepler/K2",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "Gravitational waves were first directly detected in 2015 by the LIGO observatory confirming Einstein's prediction",
+      "verdict": true,
+      "source": "LIGO Scientific Collaboration",
+      "category": "physics"
+    },
+    {
+      "claim": "Pulsars are rapidly rotating neutron stars that emit beams of electromagnetic radiation",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The Chandrasekhar limit of about 1.4 solar masses is the maximum mass of a stable white dwarf star",
+      "verdict": true,
+      "source": "Nobel Prize in Physics 1983",
+      "category": "stars"
+    },
+    {
+      "claim": "Our solar system is located in the Orion Arm of the Milky Way galaxy about 26,000 light-years from the galactic center",
+      "verdict": true,
+      "source": "NASA",
+      "category": "galaxies"
+    },
+    {
+      "claim": "Enceladus, a moon of Saturn, has geysers that shoot water ice into space from a subsurface ocean",
+      "verdict": true,
+      "source": "NASA Cassini Mission",
+      "category": "moons"
+    },
+    {
+      "claim": "Io, a moon of Jupiter, is the most volcanically active body in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Ganymede is the largest moon in the solar system, even larger than the planet Mercury",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "The Crab Nebula is the remnant of a supernova explosion observed by Chinese astronomers in 1054 AD",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "White dwarfs are the remnant cores of low to medium mass stars that have exhausted their nuclear fuel",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The Sun will eventually become a red giant in about 5 billion years before shedding its outer layers and becoming a white dwarf",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Nuclear fusion in the Sun's core converts hydrogen into helium releasing enormous amounts of energy",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The solar wind is a stream of charged particles released from the Sun's corona that extends throughout the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Solar flares and coronal mass ejections can disrupt satellites, communications, and power grids on Earth",
+      "verdict": true,
+      "source": "NASA Space Weather",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The auroras or northern and southern lights are caused by charged particles from the Sun interacting with Earth's magnetic field",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Earth is the only planet in the solar system known to have plate tectonics",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is sometimes called Earth's twin because of their similar size and mass",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has virtually no atmosphere and experiences extreme temperature swings from minus 180 to 430 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Mercury Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars once had liquid water flowing on its surface based on evidence from rovers and orbiters",
+      "verdict": true,
+      "source": "NASA Mars Exploration",
+      "category": "planets"
+    },
+    {
+      "claim": "The largest canyon in the solar system is Valles Marineris on Mars stretching over 4000 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter's moon Europa has more water than all of Earth's oceans combined",
+      "verdict": true,
+      "source": "NASA JPL",
+      "category": "moons"
+    },
+    {
+      "claim": "The Hubble Deep Field image revealed thousands of galaxies in a tiny patch of sky previously thought to be empty",
+      "verdict": true,
+      "source": "NASA Hubble",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Redshift of distant galaxies provides evidence that the universe is expanding",
+      "verdict": true,
+      "source": "Edwin Hubble, NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Dark energy is the mysterious force driving the accelerating expansion of the universe",
+      "verdict": true,
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The cosmic microwave background has a temperature of approximately 2.7 Kelvin",
+      "verdict": true,
+      "source": "NASA COBE",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Quasars are the brightest objects in the universe powered by supermassive black holes actively consuming matter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "galaxies"
+    },
+    {
+      "claim": "The Parker Solar Probe is the fastest human-made object reaching speeds over 600,000 kilometers per hour",
+      "verdict": true,
+      "source": "NASA Parker Solar Probe",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Artemis program aims to return humans to the Moon and establish a sustained presence there",
+      "verdict": true,
+      "source": "NASA Artemis",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Seasons on Earth are caused by the planet's distance from the Sun varying throughout the year",
+      "verdict": false,
+      "correction": "Seasons are caused by Earth's axial tilt of 23.5 degrees, not by distance from the Sun. In fact, Earth is closest to the Sun during the Northern Hemisphere's winter.",
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Earth's axial tilt of approximately 23.5 degrees is responsible for the seasons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The Moon causes tides on Earth through its gravitational pull",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "A full Moon occurs roughly every 29.5 days which is the length of one lunar cycle",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Solar eclipses happen when the Moon passes between the Sun and Earth blocking sunlight",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "We always see the same side of the Moon because it is tidally locked to Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Triton, Neptune's largest moon, orbits in the opposite direction to Neptune's rotation suggesting it was captured",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "The Perseid meteor shower occurs annually in August when Earth passes through debris from Comet Swift-Tuttle",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Ceres is the largest object in the asteroid belt and is classified as a dwarf planet",
+      "verdict": true,
+      "source": "NASA Dawn Mission",
+      "category": "dwarf_planets"
+    },
+    {
+      "claim": "The New Horizons spacecraft performed the first flyby of Pluto in July 2015",
+      "verdict": true,
+      "source": "NASA New Horizons",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "There are more stars in the observable universe than grains of sand on all of Earth's beaches",
+      "verdict": true,
+      "source": "Carl Sagan, verified by astronomers",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Magnetars are neutron stars with extremely powerful magnetic fields trillions of times stronger than Earth's",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The Drake Equation estimates the number of active communicative extraterrestrial civilizations in the Milky Way",
+      "verdict": true,
+      "source": "SETI Institute",
+      "category": "astrobiology"
+    },
+    {
+      "claim": "Water has been found on the Moon in permanently shadowed craters near the poles",
+      "verdict": true,
+      "source": "NASA LCROSS Mission",
+      "category": "moons"
+    },
+    {
+      "claim": "The Fermi Paradox highlights the contradiction between the high probability of extraterrestrial civilizations and the lack of evidence for them",
+      "verdict": true,
+      "source": "Enrico Fermi",
+      "category": "astrobiology"
+    },
+    {
+      "claim": "GPS satellites must account for both special and general relativity to maintain accuracy",
+      "verdict": true,
+      "source": "NASA",
+      "category": "physics"
+    },
+    {
+      "claim": "The event horizon of a black hole is the boundary beyond which nothing can escape",
+      "verdict": true,
+      "source": "NASA",
+      "category": "black_holes"
+    },
+    {
+      "claim": "Hawking radiation is theoretical radiation predicted to be emitted by black holes causing them to slowly evaporate over time",
+      "verdict": true,
+      "source": "Stephen Hawking, 1974",
+      "category": "black_holes"
+    },
+    {
+      "claim": "The observable universe contains roughly 10 to the power of 80 atoms",
+      "verdict": true,
+      "source": "Astrophysical estimates",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Mercury is the smallest planet in the solar system",
+      "verdict": true,
+      "source": "NASA Mercury Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is the closest planet to the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Humans have never landed on the Moon",
+      "verdict": false,
+      "correction": "Humans have landed on the Moon six times during the Apollo program between 1969 and 1972. Apollo 11 was the first crewed lunar landing.",
+      "source": "NASA Apollo Program",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "We have never been to the Moon",
+      "verdict": false,
+      "correction": "NASA's Apollo program successfully landed 12 astronauts on the Moon across six missions from 1969 to 1972.",
+      "source": "NASA Apollo Program",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "No human has ever walked on the Moon",
+      "verdict": false,
+      "correction": "Twelve astronauts walked on the Moon during the Apollo missions. Neil Armstrong was the first in July 1969.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Our solar system is the only solar system in the universe",
+      "verdict": false,
+      "correction": "There are billions of other star systems in our galaxy alone. Over 5,000 exoplanets have been confirmed orbiting other stars.",
+      "source": "NASA Exoplanet Archive",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "Our Sun is the only star with planets orbiting it",
+      "verdict": false,
+      "correction": "Thousands of exoplanets have been discovered orbiting other stars. Most stars likely have planetary systems.",
+      "source": "NASA",
+      "category": "exoplanets"
+    },
+    {
+      "claim": "Jupiter is the smallest planet in the solar system",
+      "verdict": false,
+      "correction": "Jupiter is the largest planet in the solar system, not the smallest. Mercury is the smallest planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is a small planet",
+      "verdict": false,
+      "correction": "Jupiter is the largest planet in the solar system with a mass more than twice that of all other planets combined.",
+      "source": "NASA Jupiter Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "The Sun is the biggest star in the universe",
+      "verdict": false,
+      "correction": "The Sun is a medium-sized star. Many stars are far larger, including UY Scuti, Betelgeuse, and VY Canis Majoris.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Earth is the only planet with water",
+      "verdict": false,
+      "correction": "Water exists in many forms across the solar system. Europa and Enceladus have subsurface oceans, Mars has ice caps, and water vapor has been detected on multiple planets and moons.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "The Earth is flat",
+      "verdict": false,
+      "correction": "Earth is an oblate spheroid, slightly flattened at the poles and bulging at the equator. This has been confirmed by countless observations, satellite imagery, and space missions.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is the center of the universe",
+      "verdict": false,
+      "correction": "Earth orbits the Sun, which is one of hundreds of billions of stars in the Milky Way. The universe has no known center.",
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The Moon landing was faked",
+      "verdict": false,
+      "correction": "All six Apollo Moon landings were real. Evidence includes hundreds of kilograms of lunar samples, retroreflectors left on the surface, and independent verification by multiple countries.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Mars is too far away to ever send humans there",
+      "verdict": false,
+      "correction": "Multiple space agencies and companies are actively developing crewed Mars missions. The Artemis program and SpaceX Starship are working toward this goal.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "There are eight planets in our solar system",
+      "verdict": true,
+      "source": "IAU",
+      "category": "solar_system"
+    },
+    {
+      "claim": "The planets in order from the Sun are Mercury Venus Earth Mars Jupiter Saturn Uranus and Neptune",
+      "verdict": true,
+      "source": "NASA",
+      "category": "solar_system"
+    },
+    {
+      "claim": "Earth is the third planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "The Sun is a star not a planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The Moon orbits Earth roughly once every 27.3 days",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Mars has the largest volcano in the solar system called Olympus Mons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has the most visible and prominent ring system of any planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "The nearest star to Earth besides the Sun is Proxima Centauri at about 4.24 light-years away",
+      "verdict": true,
+      "source": "ESO",
+      "category": "stars"
+    },
+    {
+      "claim": "Astronauts on the ISS experience weightlessness because they are in freefall around Earth not because there is no gravity",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Space is completely empty with nothing in it",
+      "verdict": false,
+      "correction": "Space is not empty. It contains gas, dust, radiation, dark matter, and dark energy. Even the voids between galaxies contain a few atoms per cubic meter.",
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "The universe will last forever and never end",
+      "verdict": false,
+      "correction": "Current theories suggest the universe may end through heat death, the Big Rip, or the Big Crunch, though this would be trillions of years in the future.",
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "We can see all of the universe from Earth",
+      "verdict": false,
+      "correction": "We can only observe the observable universe, about 93 billion light-years in diameter. The full universe may be much larger or even infinite.",
+      "source": "NASA",
+      "category": "cosmology"
+    },
+    {
+      "claim": "Mercury is the first planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has a diameter of approximately 4879 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is classified as a terrestrial planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has no natural moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Mercury lasts approximately 88 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has a mean surface temperature of about 167 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is about 0.39 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury does not have rings",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has the most eccentric orbit of any planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury has 28 known moons",
+      "verdict": false,
+      "correction": "Mercury has 0 known moons, not 28.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is the second planet from the Sun",
+      "verdict": false,
+      "correction": "Mercury is the first planet from the Sun, not the second.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is a gas giant planet",
+      "verdict": false,
+      "correction": "Mercury is classified as a terrestrial planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is the second planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus has a diameter of approximately 12104 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is classified as a terrestrial planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus has no natural moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Venus lasts approximately 225 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus has a mean surface temperature of about 464 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is about 0.72 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus does not have rings",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus rotates backwards compared to most planets",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus has 28 known moons",
+      "verdict": false,
+      "correction": "Venus has 0 known moons, not 28.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is the fourth planet from the Sun",
+      "verdict": false,
+      "correction": "Venus is the second planet from the Sun, not the fourth.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is a gas giant planet",
+      "verdict": false,
+      "correction": "Venus is classified as a terrestrial planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth has a diameter of approximately 12756 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is classified as a terrestrial planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth has 1 known moon",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Earth lasts approximately 365.25 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth has a mean surface temperature of about 15 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is about 1.0 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth does not have rings",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is the densest planet in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth has 0 known moons",
+      "verdict": false,
+      "correction": "Earth has 1 known moon, not 0.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is the second planet from the Sun",
+      "verdict": false,
+      "correction": "Earth is the third planet from the Sun, not the second.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is a gas giant planet",
+      "verdict": false,
+      "correction": "Earth is classified as a terrestrial planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is the fourth planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has a diameter of approximately 6792 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is classified as a terrestrial planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has 2 known moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Mars lasts approximately 687 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has a mean surface temperature of about -65 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is about 1.52 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars does not have rings",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has the tallest volcano in the solar system called Olympus Mons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars has 28 known moons",
+      "verdict": false,
+      "correction": "Mars has 2 known moons, not 28.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is the seventh planet from the Sun",
+      "verdict": false,
+      "correction": "Mars is the fourth planet from the Sun, not the seventh.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is a gas giant planet",
+      "verdict": false,
+      "correction": "Mars is classified as a terrestrial planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is the fifth planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has a diameter of approximately 142984 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is classified as a gas giant planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has 95 known moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Jupiter lasts approximately 4333 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has a mean surface temperature of about -110 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is about 5.2 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has a ring system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has the shortest day of any planet at under 10 hours",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter has 146 known moons",
+      "verdict": false,
+      "correction": "Jupiter has 95 known moons, not 146.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is the fourth planet from the Sun",
+      "verdict": false,
+      "correction": "Jupiter is the fifth planet from the Sun, not the fourth.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is a terrestrial planet",
+      "verdict": false,
+      "correction": "Jupiter is classified as a gas giant planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is the sixth planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has a diameter of approximately 120536 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is classified as a gas giant planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has 146 known moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Saturn lasts approximately 10759 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has a mean surface temperature of about -140 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is about 9.54 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has a ring system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is less dense than water",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has 0 known moons",
+      "verdict": false,
+      "correction": "Saturn has 146 known moons, not 0.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is the first planet from the Sun",
+      "verdict": false,
+      "correction": "Saturn is the sixth planet from the Sun, not the first.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn is a terrestrial planet",
+      "verdict": false,
+      "correction": "Saturn is classified as a gas giant planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus is the seventh planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus has a diameter of approximately 51118 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus is classified as a ice giant planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus has 28 known moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Uranus lasts approximately 30687 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus has a mean surface temperature of about -195 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus is about 19.2 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus has a ring system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus has 0 known moons",
+      "verdict": false,
+      "correction": "Uranus has 28 known moons, not 0.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus is the fifth planet from the Sun",
+      "verdict": false,
+      "correction": "Uranus is the seventh planet from the Sun, not the fifth.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Uranus is a terrestrial planet",
+      "verdict": false,
+      "correction": "Uranus is classified as a ice giant planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is the eighth planet from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has a diameter of approximately 49528 kilometers",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is classified as a ice giant planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has 16 known moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "A year on Neptune lasts approximately 60190 Earth days",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has a mean surface temperature of about -200 degrees Celsius",
+      "verdict": true,
+      "source": "NASA Fact Sheet",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is about 30.06 astronomical units from the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has a ring system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has the strongest winds in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune has 95 known moons",
+      "verdict": false,
+      "correction": "Neptune has 16 known moons, not 95.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is the second planet from the Sun",
+      "verdict": false,
+      "correction": "Neptune is the eighth planet from the Sun, not the second.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is a gas giant planet",
+      "verdict": false,
+      "correction": "Neptune is classified as a ice giant planet.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Jupiter is the largest planet in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Venus is the hottest planet in the solar system with a surface temperature of about 464 degrees Celsius",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Neptune is the coldest planet in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Saturn has the most known moons of any planet with 146",
+      "verdict": true,
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mars is larger than Neptune",
+      "verdict": false,
+      "correction": "Neptune is larger than Mars. Neptune has a diameter of 49528 km vs Mars's 6792 km.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Mercury is larger than Uranus",
+      "verdict": false,
+      "correction": "Uranus is larger than Mercury. Uranus has a diameter of 51118 km vs Mercury's 4879 km.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Earth is larger than Saturn",
+      "verdict": false,
+      "correction": "Saturn is larger than Earth. Saturn has a diameter of 120536 km vs Earth's 12756 km.",
+      "source": "NASA",
+      "category": "planets"
+    },
+    {
+      "claim": "Moon is a moon of Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Moon has a diameter of approximately 3475 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Moon is notable because it is the only natural satellite of Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Moon is a moon of Mars",
+      "verdict": false,
+      "correction": "Moon is a moon of Earth, not Mars.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Phobos is a moon of Mars",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Phobos has a diameter of approximately 22.4 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Phobos is notable because it is the larger of Mars's two moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Phobos is a moon of Jupiter",
+      "verdict": false,
+      "correction": "Phobos is a moon of Mars, not Jupiter.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Deimos is a moon of Mars",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Deimos has a diameter of approximately 12.4 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Deimos is notable because it is the smaller of Mars's two moons",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Deimos is a moon of Jupiter",
+      "verdict": false,
+      "correction": "Deimos is a moon of Mars, not Jupiter.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Io is a moon of Jupiter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Io has a diameter of approximately 3643 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Io is notable because it is the most volcanically active body in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Io is a moon of Neptune",
+      "verdict": false,
+      "correction": "Io is a moon of Jupiter, not Neptune.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Europa is a moon of Jupiter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Europa has a diameter of approximately 3122 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Europa is notable because it is the has a subsurface ocean beneath its icy crust",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Europa is a moon of Saturn",
+      "verdict": false,
+      "correction": "Europa is a moon of Jupiter, not Saturn.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Ganymede is a moon of Jupiter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Ganymede has a diameter of approximately 5268 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Ganymede is notable because it is the largest moon in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Ganymede is a moon of Saturn",
+      "verdict": false,
+      "correction": "Ganymede is a moon of Jupiter, not Saturn.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Callisto is a moon of Jupiter",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Callisto has a diameter of approximately 4821 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Callisto is notable because it is the most heavily cratered object in the solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Callisto is a moon of Earth",
+      "verdict": false,
+      "correction": "Callisto is a moon of Jupiter, not Earth.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Titan is a moon of Saturn",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Titan has a diameter of approximately 5150 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Titan is notable because it is the only moon with a dense atmosphere and liquid lakes on its surface",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Titan is a moon of Jupiter",
+      "verdict": false,
+      "correction": "Titan is a moon of Saturn, not Jupiter.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Enceladus is a moon of Saturn",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Enceladus has a diameter of approximately 504 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Enceladus is notable because it is the has geysers shooting water ice into space",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Enceladus is a moon of Neptune",
+      "verdict": false,
+      "correction": "Enceladus is a moon of Saturn, not Neptune.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Triton is a moon of Neptune",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Triton has a diameter of approximately 2707 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Triton is notable because it is the orbits Neptune in the opposite direction suggesting it was captured",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Triton is a moon of Mars",
+      "verdict": false,
+      "correction": "Triton is a moon of Neptune, not Mars.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Charon is a moon of Pluto",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Charon has a diameter of approximately 1212 kilometers",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Charon is notable because it is the largest moon relative to its parent body",
+      "verdict": true,
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Charon is a moon of Earth",
+      "verdict": false,
+      "correction": "Charon is a moon of Pluto, not Earth.",
+      "source": "NASA",
+      "category": "moons"
+    },
+    {
+      "claim": "Sun is a G-type main-sequence star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sun is notable because it is center of our solar system",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sun is a F-type supergiant star",
+      "verdict": false,
+      "correction": "Sun is a G-type main-sequence star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Proxima Centauri is a red dwarf star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Proxima Centauri is approximately 4.24 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Proxima Centauri is notable because it is nearest star to the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Proxima Centauri is a A-type main-sequence star",
+      "verdict": false,
+      "correction": "Proxima Centauri is a red dwarf star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sirius is a A-type main-sequence star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sirius is approximately 8.6 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sirius is notable because it is brightest star in the night sky",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Sirius is a G-type main-sequence star",
+      "verdict": false,
+      "correction": "Sirius is a A-type main-sequence star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Betelgeuse is a red supergiant star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Betelgeuse is approximately 700 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Betelgeuse is notable because it is one of the largest known stars expected to go supernova",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Betelgeuse is a blue supergiant star",
+      "verdict": false,
+      "correction": "Betelgeuse is a red supergiant star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Rigel is a blue supergiant star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Rigel is approximately 860 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Rigel is notable because it is brightest star in Orion",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Rigel is a red dwarf star",
+      "verdict": false,
+      "correction": "Rigel is a blue supergiant star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Vega is a A-type main-sequence star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Vega is approximately 25 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Vega is notable because it is was the northern pole star around 12000 BC",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Vega is a G-type main-sequence star",
+      "verdict": false,
+      "correction": "Vega is a A-type main-sequence star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Polaris is a F-type supergiant star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Polaris is approximately 433 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Polaris is notable because it is current North Star used for navigation",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Polaris is a red dwarf star",
+      "verdict": false,
+      "correction": "Polaris is a F-type supergiant star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Alpha Centauri A is a G-type main-sequence star",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Alpha Centauri A is approximately 4.37 light-years from Earth",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Alpha Centauri A is notable because it is part of the closest star system to the Sun",
+      "verdict": true,
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "Alpha Centauri A is a blue supergiant star",
+      "verdict": false,
+      "correction": "Alpha Centauri A is a G-type main-sequence star.",
+      "source": "NASA",
+      "category": "stars"
+    },
+    {
+      "claim": "The Apollo 11 mission was launched in 1969 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Apollo 11 targeted Moon and its achievement was first crewed Moon landing",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Apollo 11 mission was launched in 1972",
+      "verdict": false,
+      "correction": "Apollo 11 was launched in 1969, not 1972.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Voyager 1 mission was launched in 1977 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Voyager 1 targeted outer solar system and its achievement was farthest human-made object from Earth, entered interstellar space in 2012",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Voyager 1 mission was launched in 1987",
+      "verdict": false,
+      "correction": "Voyager 1 was launched in 1977, not 1987.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Voyager 2 mission was launched in 1977 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Voyager 2 targeted outer solar system and its achievement was only spacecraft to visit all four outer planets",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Voyager 2 mission was launched in 1980",
+      "verdict": false,
+      "correction": "Voyager 2 was launched in 1977, not 1980.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Hubble Space Telescope mission was launched in 1990 by NASA/ESA",
+      "verdict": true,
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Hubble Space Telescope targeted Earth orbit and its achievement was revolutionized astronomy with deep field images",
+      "verdict": true,
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Hubble Space Telescope mission was launched in 2000",
+      "verdict": false,
+      "correction": "Hubble Space Telescope was launched in 1990, not 2000.",
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Mars Pathfinder mission was launched in 1997 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Mars Pathfinder targeted Mars and its achievement was first successful Mars rover mission with Sojourner",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Mars Pathfinder mission was launched in 1994",
+      "verdict": false,
+      "correction": "Mars Pathfinder was launched in 1997, not 1994.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Cassini-Huygens mission was launched in 1997 by NASA/ESA",
+      "verdict": true,
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Cassini-Huygens targeted Saturn and its achievement was orbited Saturn for 13 years and landed Huygens probe on Titan",
+      "verdict": true,
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Cassini-Huygens mission was launched in 1992",
+      "verdict": false,
+      "correction": "Cassini-Huygens was launched in 1997, not 1992.",
+      "source": "NASA/ESA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Spirit and Opportunity mission was launched in 2004 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Spirit and Opportunity targeted Mars and its achievement was twin rovers that found evidence of past water on Mars",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Spirit and Opportunity mission was launched in 1999",
+      "verdict": false,
+      "correction": "Spirit and Opportunity was launched in 2004, not 1999.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The New Horizons mission was launched in 2006 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "New Horizons targeted Pluto and its achievement was first spacecraft to fly by Pluto in 2015",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The New Horizons mission was launched in 2003",
+      "verdict": false,
+      "correction": "New Horizons was launched in 2006, not 2003.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Curiosity mission was launched in 2012 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Curiosity targeted Mars and its achievement was car-sized rover exploring Gale Crater",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Curiosity mission was launched in 2015",
+      "verdict": false,
+      "correction": "Curiosity was launched in 2012, not 2015.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The James Webb Space Telescope mission was launched in 2021 by NASA/ESA/CSA",
+      "verdict": true,
+      "source": "NASA/ESA/CSA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "James Webb Space Telescope targeted L2 Lagrange point and its achievement was most powerful space telescope ever built observing in infrared",
+      "verdict": true,
+      "source": "NASA/ESA/CSA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The James Webb Space Telescope mission was launched in 2016",
+      "verdict": false,
+      "correction": "James Webb Space Telescope was launched in 2021, not 2016.",
+      "source": "NASA/ESA/CSA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Perseverance mission was launched in 2021 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Perseverance targeted Mars and its achievement was carried Ingenuity, first helicopter to fly on another planet",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Perseverance mission was launched in 2018",
+      "verdict": false,
+      "correction": "Perseverance was launched in 2021, not 2018.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Parker Solar Probe mission was launched in 2018 by NASA",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "Parker Solar Probe targeted Sun and its achievement was closest spacecraft to the Sun and fastest human-made object",
+      "verdict": true,
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "The Parker Solar Probe mission was launched in 2013",
+      "verdict": false,
+      "correction": "Parker Solar Probe was launched in 2018, not 2013.",
+      "source": "NASA",
+      "category": "space_exploration"
+    },
+    {
+      "claim": "David Beckham signed a contract with LA Galaxy.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Jupiter is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "NASA is providing support for the International Space Station.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Uranus is the hottest planet in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Venus is the second transmission from the center of the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Neil Armstrong was an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was an astronaut for NASA.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Pluto is in the Kuiper belt.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Earth is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "As of 2017, Pluto is the largest known trans-Neptunian object by volume in our solar system.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Pluto is a dwarf planet inside the Kuiper belt.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Venus is the second planet away from the central point of the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There is a planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Tidewater region is a galaxy.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Pluto is in the solar system.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Jupiter is out of the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was released on August 5th, 1992.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "NASA is supporting the International Space Station.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is outside the solar system.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Asteroid Day was founded in part by an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Pluto is in the asteroid belt.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Saturn is out of the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "David Beckham, with LA Galaxy, signed a contract.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Mars is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in the United States in 2014.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There are planets in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There was an astronaut named Neil Armstrong.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in 3D and IMAX 3D formats across the United States.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released on August 1st, 2014 in America.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Chris Pratt portrayed Batman in Guardians of the Galaxy.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was produced by Marvel Studios.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Solar System has Jupiter in it.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Uranus is in the Solar System and rotates around the sun.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy had Kevin Feige as a producer.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There are 9 planets in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Venus takes 224.7 Earth days to orbit the Sun.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin was an American astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin failed astronaut training.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in 3D and IMAX 3D formats.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Saturn is a planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was trained to pilot a spacecraft.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Uranus has a minimum temperature of 49 K and is the coldest planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was produced by Kevin Feige.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Kuiper belt has Pluto in it.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There are gas giants in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The most dense planet in the Solar System is Earth.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy had only Ted Danson as a producer.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "John Glenn was not an astronaut.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Ceres is within the orbit of another planet.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "David Beckham signed a five-year contract with LA Galaxy.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Asteroid Day was co-founded by an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Death by Black Hole was penned by Neil deGrasse Tyson.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Alpha Centauri is close to the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Solar System contains planets",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin was an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Venus is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "International Space Station is suited for the testing of spacecraft equipment for missions to Mars.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Earth is the densest planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "A planet is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There is a reusable spacecraft being developed by SpaceX.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Earth is outside of the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Ceres's exists as a part of Neptune's orbit.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "New Horizons passed by the largest planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was available to view at the time of release in 3D and IMAX 3D formats.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was the 2014 release for Marvel Studios.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "NASA is serving the International Space Station.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Neil Armstrong was an astronaut on Gemini 8.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was the first American astronaut to orbit the Earth.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Milky Way is in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "International Space Station is suited for the testing of spacecraft equipment.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Solar System contains Saturn.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was the first American to orbit the Earth.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released on a date.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Venus is the first planet from the center of the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy had Kevin Feige as a director.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Earth is the largest planet in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy had a producer.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy is a chartered accountant.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was released exclusively in Japan.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "International Space Station is suited for spacecraft systems testing.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is in Earth's orbit.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Chris Pratt portrayed Groot in Guardians of the Galaxy.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy first came out on August 1st, 2014.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Thanos appears in The Avengers (2012), portrayed by Damion Poitier, and Guardians of the Galaxy (2014), Avengers: Age of Ultron (2015), Avengers: Infinity War (2018).",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is within the orbit of Mars.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "New Horizons flew past the largest asteroid in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Pluto has something in its orbit.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is within the orbit of Neptune.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Neil deGrasse Tyson wrote Death by Black Hole.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Alpha Centauri is the closest system to the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Jim Parsons is a star of The Big Bang Theory.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Chris Pratt portrayed Star-Lord in Guardians of the Galaxy.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin is a former astronaut and important citizen.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Neil deGrasse Tyson wrote Death by Black Hole in 2007.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin is a former astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "International Space Station is suited for the testing of spacecraft systems.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is an object in the solar system.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy has Thanos in it.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "There is a Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Jim Parsons is in The Big Bang Theory.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Venus is the second planet from the center of the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn was not the first American to orbit the Earth.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "New Horizons flew past the largest planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Saturn is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Earth is the least dense planet in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Uranus is in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "International Space Station is unsuited for the testing of spacecraft systems.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was released on August 1st, 2014.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in different formats.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "The Solar System contains Earth.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "John Glenn is an American astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "New Horizons only flew past the smallest planet in the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Alpha Centauri is the closest star system to the Solar System, only a few light years from the Sun.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres is within the orbit of Neptune and Pluto.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Alpha Centauri is the farthest system from the Solar System.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "International Space Station is suited for the testing of spacecraft systems for missions to the Moon.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "WALL-E won zero Nebula Awards.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "The Martian features Matt Damon as an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Uranus is located completely within the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in the United States.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy is a psychological thriller.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Venus takes 22 Earth days to orbit the Sun.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Buzz Aldrin worked formerly as an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Buzz Aldrin is not a former astronaut.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Earth is a terrestrial planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Jim Parsons portrays The Big Bang Theory character Sheldon Cooper.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "In Guardians of the Galaxy, Star-Lord was portrayed by Chris Pratt.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "SpaceX is incapable of developing a reusable spacecraft.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Marvel Studios produced Guardians of the Galaxy.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "International Space Station is unsuited for the testing of spacecraft equipment.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Pluto is not in the Kuiper belt.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was released in a country.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Earth is the densest planet in the Solar System by a significant margin.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Ceres exists as a body in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy was cancelled on August 1st, 2014.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Venus takes 224.7 Earth days to orbit the Earth.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "John Glenn was a military test pilot before becoming an astronaut.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Uranus has the lowest temperature of any planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Guardians of the Galaxy came out in American theaters.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    },
+    {
+      "claim": "Santorini is in the asteroid belt.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Guardians of the Galaxy was produced by Imagine Entertainment.",
+      "verdict": false,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science",
+      "correction": "This claim has been verified as false based on Wikipedia evidence."
+    },
+    {
+      "claim": "Jupiter is a planet in the Solar System.",
+      "verdict": true,
+      "source": "FEVER/Wikipedia",
+      "category": "general_science"
+    }
+  ]
+}

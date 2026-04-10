@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvoAI</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+  <style>
+    :root {
+      --bg: #0c0c10;
+      --surface: #1c1c22;
+      --surface2: #2a2a32;
+      --border: #4a4a55;
+      --text: #ffffff;
+      --text-dim: #9ca3af;
+      --text-ghost: #52525b;
+      --green: #4ade80;
+      --red: #f87171;
+      --side-a: #a5b4fc;
+      --side-b: #f9a8d4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, 'Inter', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    /* ── Header ── */
+    .header {
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header .logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header .logo span { color: var(--side-a); }
+
+    .header .status {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--text-ghost);
+    }
+
+    .dot.on { background: var(--green); }
+    .dot.rec { background: var(--red); animation: pulse 1s infinite; }
+
+    @keyframes pulse { 50% { opacity: 0.3; } }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      overflow: hidden;
+      height: calc(100vh - 49px);
+    }
+
+    /* ── Sidebar (scores) ── */
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    .side-card {
+      padding: 16px;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .side-card .name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      cursor: text;
+      outline: none;
+      border-bottom: 1px dashed transparent;
+      display: inline-block;
+      min-width: 60px;
+    }
+
+    .side-card .name:hover { border-bottom-color: var(--text-dim); }
+    .side-card .name:focus { border-bottom-color: var(--side-a); }
+
+    .card-a .name { color: var(--side-a); }
+    .card-b .name { color: var(--side-b); }
+
+    .big-num {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .big-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .stat {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .stat strong { color: var(--text); }
+    .stat strong.g { color: var(--green); }
+    .stat strong.r { color: var(--red); }
+
+    .acc-bar {
+      height: 4px;
+      background: var(--surface2);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .acc-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+    .card-a .acc-fill { background: var(--side-a); }
+    .card-b .acc-fill { background: var(--side-b); }
+
+    .sidebar-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .sidebar-actions button {
+      flex: 1;
+      padding: 8px;
+      font-size: 11px;
+      font-family: inherit;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+
+    .sidebar-actions button:hover { color: var(--text); background: var(--surface2); }
+    .sidebar-actions .end { color: var(--red); border-color: rgba(248,113,113,0.3); }
+    .sidebar-actions .end:hover { background: rgba(248,113,113,0.1); }
+
+    /* ── Main area ── */
+    .main-area {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .rec-btn {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .rec-btn .inner {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--red);
+      transition: all 0.15s;
+    }
+
+    .rec-btn:hover { border-color: var(--red); }
+    .rec-btn.on { border-color: var(--red); background: rgba(248,113,113,0.08); }
+    .rec-btn.on .inner { border-radius: 4px; width: 16px; height: 16px; }
+
+    .side-switch {
+      display: flex;
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .side-switch button {
+      padding: 7px 18px;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .side-switch button.sel-a { background: var(--side-a); color: #fff; }
+    .side-switch button.sel-b { background: var(--side-b); color: #fff; }
+
+    .transcript {
+      flex: 1;
+      font-size: 14px;
+      color: var(--text-dim);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .transcript.active { color: var(--text); }
+
+    .hotkey-hint {
+      font-size: 11px;
+      color: var(--text-ghost);
+      white-space: nowrap;
+    }
+
+    .hotkey-hint kbd {
+      padding: 2px 6px;
+      background: var(--surface2);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 10px;
+    }
+
+    /* ── Feed ── */
+    .feed {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 0;
+    }
+
+    .feed-empty {
+      margin: auto;
+      text-align: center;
+      color: var(--text-ghost);
+      font-size: 14px;
+    }
+
+    .fi {
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--surface);
+      border-left: 3px solid var(--border);
+      animation: fadeUp 0.15s ease-out;
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } }
+
+    .fi.supported { border-left-color: var(--green); }
+    .fi.refuted { border-left-color: var(--red); }
+
+    /* Unverifiable: ghosted, not bright */
+    .fi.unverifiable {
+      border-left-color: var(--border);
+      opacity: 0.45;
+      padding: 6px 14px;
+    }
+
+    .fi.unverifiable .fi-head,
+    .fi.unverifiable .fi-detail,
+    .fi.unverifiable .fi-meta { display: none; }
+
+    .fi.unverifiable .fi-claim {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .fi-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag.a { background: rgba(129,140,248,0.15); color: var(--side-a); }
+    .tag.b { background: rgba(244,114,182,0.15); color: var(--side-b); }
+
+    .verdict-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .verdict-tag.supported { color: var(--green); }
+    .verdict-tag.refuted { color: var(--red); }
+
+    .fi-conf {
+      font-size: 10px;
+      color: var(--text-ghost);
+      margin-left: auto;
+    }
+
+    .fi-claim {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .fi-detail {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .fi-meta {
+      font-size: 10px;
+      color: var(--text-ghost);
+      margin-top: 4px;
+    }
+
+    /* ── Modal ── */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-bg.open { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      max-width: 560px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 { font-size: 16px; text-align: center; margin-bottom: 16px; }
+
+    .modal .banner {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg);
+      margin-bottom: 16px;
+    }
+
+    .modal .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal .pair .side-card { padding: 12px; }
+
+    .modal .ri {
+      padding: 8px 12px;
+      border-left: 3px solid var(--red);
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .modal .ri .corr { color: var(--text-dim); margin-top: 4px; }
+    .modal .section-title { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin: 14px 0 6px; }
+
+    .modal .close-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .modal .close-btn:hover { background: var(--border); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo"><span>convo</span>ai</div>
+  <div class="status">
+    <div class="dot" id="dot"></div>
+    <span id="statusText">connecting...</span>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="side-card card-a" id="cardA">
+      <div class="name" contenteditable="true" id="nameA" spellcheck="false">Side A</div>
+      <div class="big-num" id="accA">0%</div>
+      <div class="big-label">accuracy</div>
+      <div class="acc-bar"><div class="acc-fill" id="barA" style="width:0%"></div></div>
+      <div class="stats">
+        <div class="stat"><strong class="g" id="supA">0</strong> supported</div>
+        <div class="stat"><strong class="r" id="refA">0</strong> refuted</div>
+      </div>
+    </div>
+
+    <div class="side-card card-b" id="cardB">
+      <div class="name" contenteditable="true" id="nameB" spellcheck="false">Side B</div>
+      <div class="big-num" id="accB">0%</div>
+      <div class="big-label">accuracy</div>
+      <div class="acc-bar"><div class="acc-fill" id="barB" style="width:0%"></div></div>
+      <div class="stats">
+        <div class="stat"><strong class="g" id="supB">0</strong> supported</div>
+        <div class="stat"><strong class="r" id="refB">0</strong> refuted</div>
+      </div>
+    </div>
+
+    <div class="sidebar-actions">
+      <button onclick="doReset()">Reset</button>
+      <button onclick="doEndTurn()">End Turn</button>
+      <button class="end" onclick="doEndDebate()">Finish</button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main-area">
+
+    <div class="feed" id="feed">
+      <div class="feed-empty" id="empty">speak to start fact-checking</div>
+    </div>
+
+    <div class="controls">
+      <button class="rec-btn" id="recBtn" onclick="toggleRec()">
+        <div class="inner"></div>
+      </button>
+      <div class="side-switch">
+        <button id="swA" class="sel-a" onclick="pick('a')">A</button>
+        <button id="swB" onclick="pick('b')">B</button>
+      </div>
+      <div class="transcript" id="transcript">Press spacebar to record</div>
+      <div class="hotkey-hint"><kbd>space</kbd> rec</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h2 id="modalTitle">Summary</h2>
+    <div id="modalBody"></div>
+    <button class="close-btn" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+const socket = io();
+let side = 'a';
+let rec = false;
+let actx, src, proc;
+
+// ── Init: auto-connect and set sides ──
+socket.on('connect', () => {
+  document.getElementById('dot').className = 'dot on';
+  document.getElementById('statusText').textContent = 'ready';
+  syncNames();
+});
+
+socket.on('disconnect', () => {
+  document.getElementById('dot').className = 'dot';
+  document.getElementById('statusText').textContent = 'disconnected';
+});
+
+// Sync side names on blur
+document.getElementById('nameA').addEventListener('blur', syncNames);
+document.getElementById('nameB').addEventListener('blur', syncNames);
+document.getElementById('nameA').addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();e.target.blur();} });
+document.getElementById('nameB').addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();e.target.blur();} });
+
+function syncNames() {
+  const a = document.getElementById('nameA').textContent.trim() || 'Side A';
+  const b = document.getElementById('nameB').textContent.trim() || 'Side B';
+  document.getElementById('swA').textContent = a;
+  document.getElementById('swB').textContent = b;
+  socket.emit('set_sides', { side_a: a, side_b: b });
+}
+
+// ── Socket events ──
+socket.on('transcription', d => {
+  const el = document.getElementById('transcript');
+  el.textContent = d.text;
+  el.classList.add('active');
+});
+
+socket.on('fact_result', d => {
+  addItem(d);
+  updateScores(d.scores);
+});
+
+socket.on('side_summary', d => showTurnSummary(d));
+socket.on('debate_summary', d => showFinalSummary(d));
+socket.on('debate_reset', () => {
+  document.getElementById('feed').innerHTML = '<div class="feed-empty" id="empty">speak to start fact-checking</div>';
+  resetScores();
+});
+
+// ── Side switch ──
+function pick(s) {
+  side = s;
+  socket.emit('set_active_side', { side: s });
+  document.getElementById('swA').className = s === 'a' ? 'sel-a' : '';
+  document.getElementById('swB').className = s === 'b' ? 'sel-b' : '';
+}
+
+// ── Recording ──
+async function toggleRec() {
+  rec ? stopRec() : await startRec();
+}
+
+async function startRec() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true }
+    });
+    actx = new AudioContext({ sampleRate: 16000 });
+    src = actx.createMediaStreamSource(stream);
+    proc = actx.createScriptProcessor(4096, 1, 1);
+
+    // Streaming mode: send fixed 2.5s chunks continuously — no silence detection
+    let buf = [];
+    const CHUNK_SAMPLES = 16000 * 2.5; // 2.5 seconds at 16kHz
+
+    proc.onaudioprocess = e => {
+      const inp = e.inputBuffer.getChannelData(0);
+      const s16 = new Int16Array(inp.length);
+      for (let i = 0; i < inp.length; i++) s16[i] = Math.max(-1, Math.min(1, inp[i])) * 0x7FFF;
+
+      for (let i = 0; i < s16.length; i++) buf.push(s16[i]);
+
+      // Send chunk as soon as it reaches the target size
+      if (buf.length >= CHUNK_SAMPLES) {
+        send(buf);
+        buf = [];
+      }
+    };
+
+    src.connect(proc);
+    proc.connect(actx.destination);
+    rec = true;
+    document.getElementById('recBtn').classList.add('on');
+    document.getElementById('dot').className = 'dot rec';
+    document.getElementById('statusText').textContent = 'recording';
+    document.getElementById('transcript').textContent = 'listening...';
+    document.getElementById('transcript').classList.add('active');
+  } catch(e) {
+    alert('Microphone access required.');
+  }
+}
+
+function send(buf) {
+  socket.emit('audio_chunk', { audio: new Int16Array(buf).buffer, side });
+}
+
+function stopRec() {
+  proc?.disconnect(); src?.disconnect(); actx?.close();
+  proc = src = actx = null;
+  rec = false;
+  document.getElementById('recBtn').classList.remove('on');
+  document.getElementById('dot').className = 'dot on';
+  document.getElementById('statusText').textContent = 'ready';
+  document.getElementById('transcript').classList.remove('active');
+}
+
+// ── Feed ──
+function addItem(d) {
+  const el = document.getElementById('empty');
+  if (el) el.remove();
+
+  const f = document.getElementById('feed');
+  const div = document.createElement('div');
+  div.className = `fi ${d.result.status}`;
+
+  const sTag = d.side === 'a' ? 'a' : 'b';
+  const sName = document.getElementById(d.side === 'a' ? 'nameA' : 'nameB').textContent;
+
+  if (d.result.status === 'unverifiable') {
+    div.innerHTML = `<div class="fi-claim">${sName}: "${d.claim}"</div>`;
+  } else {
+    div.innerHTML = `
+      <div class="fi-head">
+        <span class="tag ${sTag}">${sName}</span>
+        <span class="verdict-tag ${d.result.status}">${d.result.status}</span>
+        <span class="fi-conf">${Math.round(d.result.confidence * 100)}%</span>
+      </div>
+      <div class="fi-claim">"${d.claim}"</div>
+      <div class="fi-detail">${d.result.message}</div>
+      ${d.result.source ? `<div class="fi-meta">${d.result.source} / ${d.result.category}</div>` : ''}
+    `;
+  }
+
+  f.insertBefore(div, f.firstChild);
+}
+
+// ── Scores ──
+function updateScores(sc) {
+  if (sc.a) {
+    document.getElementById('accA').textContent = sc.a.accuracy + '%';
+    document.getElementById('barA').style.width = sc.a.accuracy + '%';
+    document.getElementById('supA').textContent = sc.a.supported;
+    document.getElementById('refA').textContent = sc.a.refuted;
+  }
+  if (sc.b) {
+    document.getElementById('accB').textContent = sc.b.accuracy + '%';
+    document.getElementById('barB').style.width = sc.b.accuracy + '%';
+    document.getElementById('supB').textContent = sc.b.supported;
+    document.getElementById('refB').textContent = sc.b.refuted;
+  }
+}
+
+function resetScores() {
+  ['A', 'B'].forEach(s => {
+    document.getElementById('acc' + s).textContent = '0%';
+    document.getElementById('bar' + s).style.width = '0%';
+    document.getElementById('sup' + s).textContent = '0';
+    document.getElementById('ref' + s).textContent = '0';
+  });
+}
+
+// ── Actions ──
+function doReset() { if(rec) stopRec(); socket.emit('reset'); }
+function doEndTurn() { if(rec) stopRec(); socket.emit('end_side', { side }); }
+function doEndDebate() { if(rec) stopRec(); socket.emit('end_debate'); }
+
+// ── Modal ──
+function showTurnSummary(d) {
+  document.getElementById('modalTitle').textContent = d.summary.name + ' — Turn';
+  let h = `
+    <div class="banner">${d.summary.accuracy}% accuracy</div>
+    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:12px">
+      <span style="color:var(--green)">${d.summary.supported} supported</span>
+      <span style="color:var(--red)">${d.summary.refuted} refuted</span>
+    </div>`;
+  const wrong = d.claims.filter(c => c.result.status === 'refuted');
+  if (wrong.length) {
+    h += '<div class="section-title">Incorrect Claims</div>';
+    wrong.forEach(c => { h += `<div class="ri"><div>"${c.text}"</div><div class="corr">${c.result.message}</div></div>`; });
+  }
+  document.getElementById('modalBody').innerHTML = h;
+  document.getElementById('modal').classList.add('open');
+}
+
+function showFinalSummary(d) {
+  const sA = d.sides.a, sB = d.sides.b;
+  document.getElementById('modalTitle').textContent = 'Debate Results';
+  let h = `<div class="banner">${d.winner === 'tie' ? 'Tie' : 'Winner: ' + d.winner_name}</div>
+    <div class="pair">
+      <div class="side-card card-a"><div class="name" style="cursor:default">${sA.name}</div>
+        <div class="big-num">${sA.accuracy}%</div><div class="big-label">accuracy</div>
+        <div class="stats"><div class="stat"><strong class="g">${sA.supported}</strong> sup</div><div class="stat"><strong class="r">${sA.refuted}</strong> ref</div></div>
+      </div>
+      <div class="side-card card-b"><div class="name" style="cursor:default">${sB.name}</div>
+        <div class="big-num">${sB.accuracy}%</div><div class="big-label">accuracy</div>
+        <div class="stats"><div class="stat"><strong class="g">${sB.supported}</strong> sup</div><div class="stat"><strong class="r">${sB.refuted}</strong> ref</div></div>
+      </div>
+    </div>`;
+  ['a','b'].forEach(s => {
+    if (!d.all_claims[s]) return;
+    const wrong = d.all_claims[s].filter(c => c.result.status === 'refuted');
+    if (wrong.length) {
+      h += `<div class="section-title">${d.sides[s].name} — Wrong</div>`;
+      wrong.forEach(c => { h += `<div class="ri"><div>"${c.text}"</div><div class="corr">${c.result.message}</div></div>`; });
+    }
+  });
+  document.getElementById('modalBody').innerHTML = h;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+// ── Spacebar ──
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && !e.repeat
+    && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)
+    && !document.activeElement.isContentEditable
+    && !document.getElementById('modal').classList.contains('open')) {
+    e.preventDefault();
+    toggleRec();
+  }
+});
+</script>
+</body>
+</html>
