@@ -1,248 +1,208 @@
 """
-main.py — ConvoAI: Real-Time Space Debate Fact Checker
+main.py — ConvoAI: Real-Time Debate Fact Checker
 
-A real-time audio debate fact-checking system that:
-1. Captures live microphone audio from a browser
-2. Transcribes speech locally using Whisper (faster-whisper)
-3. Verifies claims against a 9,700+ fact dataset (FEVER/Wikipedia)
-4. Tracks scores per debate side and shows corrections
+5-stage NLP pipeline:
+  1. Whisper STT (audio → text)
+  2. Sanitization (clean filler, fix formatting)
+  3. Claim extraction (split sentences, filter opinions)
+  4. Evidence retrieval (FAISS + Wikipedia)
+  5. NLI verification (DeBERTa entailment/contradiction)
 
-All models run locally — no API calls.
-
-Usage:
-    python main.py
-
-Then open http://localhost:5000 in your browser.
+Usage: python main.py
 """
 
+import time
+import numpy as np
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 
-import re
 from mymodel import Transcriber, FactChecker
-from preprocess import extract_claims, is_filler
+from preprocess import sanitize, is_filler
 from debate import Debate
 
-# ============================================================
-# Flask App Setup
-# ============================================================
-
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "convoai-debate"
+app.config["SECRET_KEY"] = "convoai"
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
 
-# ============================================================
-# Load Models (local, no API)
-# ============================================================
+print("=" * 50)
+print("ConvoAI — Debate Fact Checker")
+print("=" * 50)
 
-print("=" * 60)
-print("ConvoAI — Space Debate Fact Checker")
-print("=" * 60)
-print("\nLoading models (this may take a moment on first run)...\n")
+print("\n[1/3] Whisper STT")
+transcriber = Transcriber(model_size="small", device="cpu")
 
-print("[1/2] Speech-to-Text (Whisper)")
-transcriber = Transcriber(model_size="tiny", device="cpu")
-
-print("\n[2/2] Fact Verification (Sentence-Transformers + FEVER)")
+print("\n[2/3] Wikipedia Evidence Retrieval")
+print("[3/3] DeBERTa NLI Verification")
 checker = FactChecker()
 
-print("\n" + "=" * 60)
-print("All models loaded. Open http://localhost:5000")
-print("=" * 60 + "\n")
-
-# ============================================================
-# Debate Session + Rolling Transcript Buffer
-# ============================================================
+print("\n" + "=" * 50)
+print("Ready. http://localhost:5000")
+print("=" * 50 + "\n")
 
 debate = Debate()
+transcripts = {"a": "", "b": ""}
+verified_claims = {"a": [], "b": []}
+last_verify = {"a": 0, "b": 0}
+last_verify_len = {"a": 0, "b": 0}
 
-# Per-side rolling buffer of partial transcripts
-# Accumulates text as chunks come in. When we detect a sentence boundary,
-# we fact-check the completed sentence and keep the remainder in the buffer.
-buffer = {"a": "", "b": ""}
-
-# Track recently processed sentences to avoid duplicates
-processed_sentences = {"a": set(), "b": set()}
-
-SENTENCE_END = re.compile(r'[.!?]+\s*')
+VERIFY_INTERVAL = 12
 
 
-def flush_sentences(side: str, force: bool = False) -> list[str]:
-    """Pull complete sentences out of the buffer for the given side.
+def reset_state():
+    for s in ("a", "b"):
+        transcripts[s] = ""
+        verified_claims[s] = []
+        last_verify[s] = 0
+        last_verify_len[s] = 0
 
-    Returns a list of new sentences to fact-check.
-    If force=True, flushes remaining buffer even without sentence-ending punctuation.
-    """
-    text = buffer[side].strip()
-    if not text:
-        return []
-
-    # Split on sentence boundaries
-    parts = re.split(r'(?<=[.!?])\s+', text)
-
-    sentences = []
-    if force:
-        # Flush everything
-        for p in parts:
-            p = p.strip()
-            if p and len(p) >= 10:
-                sentences.append(p)
-        buffer[side] = ""
-    else:
-        # Only take sentences that end with punctuation; keep the last incomplete part
-        if text.endswith(('.', '!', '?')):
-            # Last sentence is complete
-            for p in parts:
-                p = p.strip()
-                if p and len(p) >= 10:
-                    sentences.append(p)
-            buffer[side] = ""
-        else:
-            # Last part is incomplete — process all but the last
-            for p in parts[:-1]:
-                p = p.strip()
-                if p and len(p) >= 10:
-                    sentences.append(p)
-            buffer[side] = parts[-1] if parts else ""
-
-    # Dedupe (in case Whisper re-transcribed the same audio)
-    unique = []
-    for s in sentences:
-        key = s.lower().strip()
-        if key not in processed_sentences[side] and not is_filler(s):
-            processed_sentences[side].add(key)
-            unique.append(s)
-
-    return unique
-
-
-def reset_buffer():
-    buffer["a"] = ""
-    buffer["b"] = ""
-    processed_sentences["a"].clear()
-    processed_sentences["b"].clear()
-
-# ============================================================
-# Routes
-# ============================================================
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# ============================================================
-# WebSocket Events
-# ============================================================
-
 @socketio.on("connect")
 def on_connect():
-    emit("status", {"message": "Connected. Models ready."})
+    emit("status", {"msg": "ready"})
 
 
 @socketio.on("set_sides")
 def on_set_sides(data):
     global debate
-    debate = Debate(
-        side_a_name=data.get("side_a", "Side A"),
-        side_b_name=data.get("side_b", "Side B"),
-    )
-    reset_buffer()
-    emit("debate_reset", debate.get_full_summary())
+    debate = Debate(data.get("side_a", "Side A"), data.get("side_b", "Side B"))
+    reset_state()
+    emit("debate_reset", {})
 
 
 @socketio.on("set_active_side")
 def on_set_active_side(data):
-    side = data.get("side", "a")
-    debate.set_active_side(side)
-    emit("side_changed", {"side": side, "name": debate.sides[side].name})
+    debate.set_active_side(data.get("side", "a"))
 
 
 @socketio.on("audio_chunk")
 def on_audio_chunk(data):
-    """Process incoming audio chunk: transcribe -> buffer -> detect sentences -> fact-check.
-
-    This is called continuously every ~3 seconds while recording. Text accumulates
-    in a rolling buffer; complete sentences are extracted and fact-checked as they form.
-    """
-    audio_bytes = data.get("audio")
+    audio_raw = data.get("audio")
     side = data.get("side", debate.active_side or "a")
-
-    if not audio_bytes:
+    if not isinstance(audio_raw, (bytes, bytearray)):
         return
 
-    # Transcribe the chunk (Whisper tiny — fast)
-    text = transcriber.transcribe_audio(audio_bytes)
-    if not text:
+    audio_bytes = bytes(audio_raw)
+
+    # Resample if needed
+    client_rate = data.get("sampleRate", 16000)
+    if client_rate != 16000:
+        samples = np.frombuffer(audio_bytes, dtype=np.int16)
+        ratio = 16000 / client_rate
+        indices = np.arange(0, len(samples), 1 / ratio).astype(int)
+        indices = indices[indices < len(samples)]
+        audio_bytes = samples[indices].tobytes()
+
+    # Stage 1: Transcribe
+    raw = transcriber.transcribe_audio(audio_bytes)
+    if not raw:
         return
 
-    # Append to the rolling buffer for this side
-    buffer[side] = (buffer[side] + " " + text).strip()
+    # Stage 2: Sanitize
+    clean = sanitize(raw)
+    if not clean or is_filler(clean):
+        return
 
-    # Show live partial transcript immediately
-    emit("transcription", {"text": buffer[side], "side": side, "partial": True})
+    # Accumulate
+    transcripts[side] = (transcripts[side] + " " + clean).strip()
+    emit("new_text", {"side": side, "text": clean})
 
-    # Extract any complete sentences from the buffer
-    sentences = flush_sentences(side)
+    # Auto-verify periodically
+    now = time.time()
+    new_chars = len(transcripts[side]) - last_verify_len[side]
+    if new_chars > 40 and now - last_verify[side] > VERIFY_INTERVAL:
+        run_verify(side)
 
-    for claim in sentences:
-        result = checker.check(claim)
-        debate.add_claim(claim, result, side=side)
 
-        emit("fact_result", {
-            "claim": claim,
-            "result": result,
-            "side": side,
-            "scores": {
-                k: s.summary() for k, s in debate.sides.items()
-            },
-        })
+@socketio.on("verify_now")
+def on_verify_now(data):
+    run_verify(data.get("side", debate.active_side or "a"))
 
 
 @socketio.on("end_side")
 def on_end_side(data):
     side = data.get("side", debate.active_side or "a")
+    emit("loading", {"msg": "Verifying claims..."})
 
-    # Force-flush any remaining buffer text
-    remaining = flush_sentences(side, force=True)
-    for claim in remaining:
-        result = checker.check(claim)
-        debate.add_claim(claim, result, side=side)
-        emit("fact_result", {
-            "claim": claim,
-            "result": result,
-            "side": side,
-            "scores": {k: s.summary() for k, s in debate.sides.items()},
-        })
+    # Final verify
+    if transcripts[side] and len(transcripts[side]) > last_verify_len[side]:
+        run_verify(side)
 
-    claims = debate.get_side_claims(side)
     summary = debate.get_side_summary(side)
-    emit("side_summary", {
+    emit("turn_report", {
         "side": side,
         "summary": summary,
-        "claims": claims,
+        "claims": verified_claims[side],
     })
 
 
 @socketio.on("end_debate")
 def on_end_debate():
     full = debate.get_full_summary()
-    full["all_claims"] = {
-        k: debate.get_side_claims(k) for k in debate.sides
-    }
     emit("debate_summary", full)
 
 
 @socketio.on("reset")
 def on_reset():
     debate.reset()
-    reset_buffer()
-    emit("debate_reset", debate.get_full_summary())
+    reset_state()
+    emit("debate_reset", {})
 
 
-# ============================================================
-# Entry Point
-# ============================================================
+def run_verify(side):
+    """Run stages 3-5 on new transcript text."""
+    new_text = transcripts[side][last_verify_len[side]:]
+    if not new_text.strip() or len(new_text.split()) < 4:
+        return
+
+    last_verify[side] = time.time()
+    last_verify_len[side] = len(transcripts[side])
+
+    # Stage 3: Extract claims (split into sentences)
+    import re
+    sentences = re.split(r'(?<=[.!?])\s+', new_text)
+    # Also treat the whole text as a claim if no punctuation
+    if len(sentences) == 1 and not any(new_text.rstrip().endswith(p) for p in '.!?'):
+        sentences = [new_text]
+
+    claims = [s.strip() for s in sentences if len(s.strip()) >= 15 and not is_filler(s)]
+    print(f"[VERIFY] side={side}, {len(claims)} claims from {len(new_text)} chars")
+
+    for claim in claims:
+        # Stages 4+5: Retrieve + Verify
+        result = checker.check(claim)
+        print(f"  [{result['verdict']}] {claim[:50]} — {result['reason'][:40]}")
+
+        verified_claims[side].append({
+            "text": claim,
+            "verdict": result["verdict"],
+            "confidence": result["confidence"],
+            "reason": result["reason"],
+            "evidence": result.get("evidence", ""),
+            "source": result.get("source", ""),
+        })
+
+        if result["verdict"] in ("supported", "refuted"):
+            debate.add_claim(claim, {
+                "status": "supported" if result["verdict"] == "supported" else "refuted",
+                "message": result["reason"],
+            }, side=side)
+
+        emit("highlight", {
+            "side": side,
+            "claim": {
+                "text": claim,
+                "verdict": result["verdict"],
+                "confidence": result["confidence"],
+                "reason": result["reason"],
+            },
+            "scores": {k: s.summary() for k, s in debate.sides.items()},
+        })
+
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, debug=False)

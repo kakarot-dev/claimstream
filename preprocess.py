@@ -1,92 +1,58 @@
 """
-preprocess.py — Data preprocessing and text handling for ConvoAI.
+preprocess.py — NLP Stage 1: Text Sanitization
 
-Handles:
-1. Sentence splitting from transcribed speech
-2. Filler/noise filtering (removes non-factual utterances)
-3. Dataset export to CSV for sample submission
+Cleans up raw Whisper output before sending to Gemma for verification.
 """
 
 import re
-import json
-import csv
 
-
-# ============================================================
-# Filler Detection
-# ============================================================
-
-FILLER_PATTERNS = re.compile(
-    r'^(ok|okay|um+|uh+|ah+|hey|hi|hello|yeah|yes|no|sure|right|'
-    r'thank you|thanks|test.*|let me|look at|so+|well|bye|'
-    r'can you hear|is this on|checking|one two|alright)[\s.,!?]*$',
-    re.IGNORECASE,
+# Filler words to strip
+FILLERS = re.compile(
+    r'\b(um+|uh+|ah+|er+|like|you know|i mean|basically|literally|'
+    r'so+|well|right|okay|ok)\b',
+    re.IGNORECASE
 )
+
+# Common Whisper artifacts
+ARTIFACTS = re.compile(r'(\.\.\.+|---+|\[.*?\]|\(.*?\))')
+
+
+def sanitize(text: str) -> str:
+    """Stage 1: Clean raw Whisper output.
+
+    - Remove filler words (um, uh, like, you know)
+    - Remove Whisper artifacts ([inaudible], ...)
+    - Fix double spaces
+    - Fix capitalization after periods
+    - Merge broken fragments
+    """
+    if not text:
+        return ""
+
+    # Remove artifacts
+    text = ARTIFACTS.sub('', text)
+
+    # Remove fillers (but keep sentence structure)
+    text = FILLERS.sub('', text)
+
+    # Clean up whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    text = re.sub(r'\s+([.,!?])', r'\1', text)  # fix space before punctuation
+    text = re.sub(r'([.,!?])\s*([.,!?])', r'\1', text)  # fix double punctuation
+
+    # Capitalize after sentence endings
+    def cap_after_period(m):
+        return m.group(1) + ' ' + m.group(2).upper()
+    text = re.sub(r'([.!?])\s+([a-z])', cap_after_period, text)
+
+    # Capitalize first letter
+    if text and text[0].islower():
+        text = text[0].upper() + text[1:]
+
+    return text.strip()
 
 
 def is_filler(text: str) -> bool:
-    """Return True if text is conversational filler, not a factual claim."""
-    stripped = text.strip().rstrip('.!?,')
-    if len(stripped.split()) < 4:
-        return True
-    if FILLER_PATTERNS.match(stripped):
-        return True
-    return False
-
-
-# ============================================================
-# Sentence Splitting
-# ============================================================
-
-def split_sentences(text: str) -> list[str]:
-    """Split transcribed text into individual sentences/claims."""
-    sentences = re.split(r'(?<=[.!?])\s+', text)
-    if len(sentences) == 1 and not any(text.endswith(p) for p in ".!?"):
-        return [text]
-    return [s.strip() for s in sentences if s.strip()]
-
-
-def extract_claims(text: str, min_length: int = 10) -> list[str]:
-    """Extract factual claims from transcribed speech.
-
-    Splits into sentences, filters out filler and short utterances.
-    """
-    sentences = split_sentences(text)
-    claims = []
-    for s in sentences:
-        s = s.strip()
-        if len(s) >= min_length and not is_filler(s):
-            claims.append(s)
-    return claims
-
-
-# ============================================================
-# Dataset Export
-# ============================================================
-
-def export_dataset_csv(json_path: str = "data/space_facts.json",
-                       csv_path: str = "dataset_sample.csv",
-                       max_rows: int = 100):
-    """Export a sample of the fact dataset as CSV for project submission."""
-    with open(json_path) as f:
-        data = json.load(f)
-
-    facts = data["facts"][:max_rows]
-
-    with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["claim", "verdict", "source", "category", "correction"])
-        for fact in facts:
-            writer.writerow([
-                fact.get("claim", ""),
-                fact.get("verdict", ""),
-                fact.get("source", ""),
-                fact.get("category", ""),
-                fact.get("correction", ""),
-            ])
-
-    print(f"Exported {len(facts)} facts to {csv_path}")
-
-
-if __name__ == "__main__":
-    export_dataset_csv()
+    """Check if entire text is filler (not worth processing)."""
+    stripped = FILLERS.sub('', text).strip()
+    return len(stripped.split()) < 3
