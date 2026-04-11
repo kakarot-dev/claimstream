@@ -70,6 +70,9 @@
     .vbtn:hover{background:var(--surface2);color:var(--text)}
     .ctrl-spacer{flex:1}
     .hk{font-size:11px;color:var(--text-ghost)}.hk kbd{padding:2px 6px;background:var(--surface2);border-radius:4px;font-family:inherit;font-size:10px}
+    .vstatus{font-size:11px;color:var(--side-a);display:flex;align-items:center;gap:6px;opacity:0;transition:opacity .3s}
+    .vstatus.active{opacity:1}
+    .vstatus .vs-dot{width:6px;height:6px;border-radius:50%;background:var(--side-a);animation:pulse 1s infinite}
 
     /* Sidebar */
     .sidebar{border-left:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
@@ -128,6 +131,7 @@
         <button id="swB" onclick="pick('b')">B</button>
       </div>
       <button class="vbtn" onclick="verifyNow()">Verify</button>
+      <div class="vstatus" id="vstatus"><div class="vs-dot"></div><span id="vstatusText">verifying...</span></div>
       <div class="ctrl-spacer"></div>
       <div class="hk"><kbd>space</kbd> rec &nbsp;<kbd>v</kbd> verify</div>
     </div>
@@ -181,8 +185,8 @@ function syncNames() {
   socket.emit('set_sides',{side_a:a,side_b:b});
 }
 
-// ── New text enters with animation ──
-socket.on('new_text', d => {
+// ── Transcript sync — always shows full text ──
+socket.on('transcript_sync', d => {
   const canvas = document.getElementById('canvas');
   const empty = canvas.querySelector('.empty');
   if (empty) empty.remove();
@@ -198,7 +202,7 @@ socket.on('new_text', d => {
     canvas.appendChild(hdr);
   }
 
-  // Get or create the text container for this side
+  // Get or create the text container
   let container = document.getElementById('txt-'+d.side);
   if (!container) {
     container = document.createElement('span');
@@ -206,41 +210,91 @@ socket.on('new_text', d => {
     canvas.appendChild(container);
   }
 
-  // Add new words with animation
-  const words = d.text.split(/\s+/);
-  for (const word of words) {
-    const span = document.createElement('span');
-    span.className = 'w';
-    span.textContent = word + ' ';
-    container.appendChild(span);
+  // Update with full transcript (preserves any highlights already applied)
+  // Only append new words to avoid destroying highlights
+  const currentLen = container.textContent.length;
+  const fullLen = d.full.length;
+  if (fullLen > currentLen && d.new) {
+    const words = d.new.split(/\s+/);
+    for (const word of words) {
+      const span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = word + ' ';
+      container.appendChild(span);
+    }
   }
 
   canvas.scrollTop = canvas.scrollHeight;
 });
 
-// ── Live highlight from Gemma ──
+// ── Highlights ──
+let allClaims = { a: [], b: [] };
+
 socket.on('highlight', d => {
-  const container = document.getElementById('txt-'+d.side);
-  if (!container) return;
-
-  const claim = d.claim;
-  const html = container.innerHTML;
-  const text = claim.text;
-
-  // Find the claim text and wrap it with highlight
-  const idx = html.toLowerCase().indexOf(text.toLowerCase());
-  if (idx !== -1) {
-    const before = html.substring(0, idx);
-    const match = html.substring(idx, idx + text.length);
-    const after = html.substring(idx + text.length);
-    const v = claim.verdict;
-    const reason = (claim.reason||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-    const tip = (v==='true'||v==='false') ? `<span class="tip"><span class="tv ${v}">${v==='true'?'Verified True':'False Claim'}</span><br>${reason}</span>` : '';
-    container.innerHTML = before + `<span class="cl ${v}">${match}${tip}</span>` + after;
-  }
-
+  console.log('HIGHLIGHT:', d.claim.verdict, d.claim.text.substring(0,40));
+  allClaims[d.side].push(d.claim);
   if (d.scores) updateScores(d.scores);
 });
+
+socket.on('verify_done', d => {
+  console.log('VERIFY_DONE, applying highlights:', allClaims[d.side].length);
+  applyHighlights(d.side);
+});
+
+function applyHighlights(s) {
+  const container = document.getElementById('txt-'+s);
+  if (!container) return;
+
+  const claims = allClaims[s];
+  if (!claims.length) return;
+
+  // Normalize text: collapse whitespace for matching
+  const plainText = container.textContent.replace(/\s+/g, ' ').trim();
+  let html = escapeHtml(plainText);
+
+  // Find and highlight each claim
+  const positioned = [];
+  for (const c of claims) {
+    if (c.verdict !== 'supported' && c.verdict !== 'refuted') continue;
+    const normalized = c.text.replace(/\s+/g, ' ').trim();
+    const idx = html.toLowerCase().indexOf(normalized.toLowerCase());
+    if (idx !== -1) {
+      positioned.push({ ...c, idx, len: normalized.length });
+    } else {
+      // Try matching first 4 words as fallback
+      const words = normalized.split(' ').slice(0, 4).join(' ');
+      const idx2 = html.toLowerCase().indexOf(words.toLowerCase());
+      if (idx2 !== -1) {
+        // Find end of sentence from this point
+        let end = idx2 + normalized.length;
+        if (end > html.length) end = Math.min(html.length, idx2 + 80);
+        positioned.push({ ...c, idx: idx2, len: end - idx2 });
+      }
+    }
+  }
+
+  // Sort reverse to preserve indices
+  positioned.sort((a, b) => b.idx - a.idx);
+
+  for (const c of positioned) {
+    const before = html.substring(0, c.idx);
+    const match = html.substring(c.idx, c.idx + c.len);
+    const after = html.substring(c.idx + c.len);
+    const reason = (c.reason||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+    const v = c.verdict;
+    const label = v === 'supported' ? 'Verified True' : 'False Claim';
+    const tip = `<span class="tip"><span class="tv ${v === 'supported' ? 'true' : 'false'}">${label}</span><br>${reason}</span>`;
+    const cls = v === 'supported' ? 'true' : 'false';
+    html = before + `<span class="cl ${cls}">${match}${tip}</span>` + after;
+  }
+
+  container.innerHTML = html;
+  console.log('Highlights applied:', positioned.length, 'of', claims.length);
+}
+
+function escapeHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
 // ── Loading overlay ──
 socket.on('loading', d => {
@@ -267,6 +321,13 @@ socket.on('debate_summary', d => {
   document.getElementById('modal').classList.add('open');
 });
 
+socket.on('verify_status', d => {
+  const el = document.getElementById('vstatus');
+  const txt = document.getElementById('vstatusText');
+  if (d.active) { el.classList.add('active'); txt.textContent = d.msg || 'verifying...'; }
+  else { el.classList.remove('active'); }
+});
+
 socket.on('debate_reset', () => {
   document.getElementById('canvas').innerHTML = '<span class="empty">Start recording — text appears here with live fact-check highlights.</span>';
   reports = {a:null,b:null};
@@ -278,42 +339,100 @@ socket.on('debate_reset', () => {
 // ── Functions ──
 function pick(s) { side=s; socket.emit('set_active_side',{side:s}); document.getElementById('swA').className=s==='a'?'sel-a':''; document.getElementById('swB').className=s==='b'?'sel-b':''; }
 
-async function toggleRec() { rec ? stopRec() : await startRec(); }
+function toggleRec() { rec ? stopRec() : startRec(); }
 
 async function startRec() {
+  if (!socket.connected) { return; }
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({audio:{sampleRate:16000,channelCount:1,echoCancellation:true,noiseSuppression:true}});
-    actx = new AudioContext({sampleRate:16000});
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true }
+    });
+    actx = new AudioContext({ sampleRate: 16000 });
     src = actx.createMediaStreamSource(stream);
-    proc = actx.createScriptProcessor(4096,1,1);
-    let buf=[],silStart=null,chunkStart=Date.now();
+    proc = actx.createScriptProcessor(4096, 1, 1);
+
+    let buf = [], silStart = null, chunkStart = Date.now();
+
     proc.onaudioprocess = e => {
-      const inp=e.inputBuffer.getChannelData(0);
-      const s16=new Int16Array(inp.length);
-      for(let i=0;i<inp.length;i++) s16[i]=Math.max(-1,Math.min(1,inp[i]))*0x7FFF;
-      for(let i=0;i<s16.length;i++) buf.push(s16[i]);
-      const rms=Math.sqrt(inp.reduce((s,x)=>s+x*x,0)/inp.length);
-      const now=Date.now(),elapsed=now-chunkStart;
-      if(elapsed>=6000&&buf.length>0){send(buf);buf=[];chunkStart=now;silStart=null}
-      else if(rms<.01){if(!silStart)silStart=now;if(now-silStart>1000&&elapsed>=2000&&buf.length>0){send(buf);buf=[];chunkStart=now;silStart=null}}
-      else{silStart=null}
+      const inp = e.inputBuffer.getChannelData(0);
+      const s16 = new Int16Array(inp.length);
+      for (let i = 0; i < inp.length; i++) s16[i] = Math.max(-1, Math.min(1, inp[i])) * 0x7FFF;
+      for (let i = 0; i < s16.length; i++) buf.push(s16[i]);
+
+      const rms = Math.sqrt(inp.reduce((s, x) => s + x * x, 0) / inp.length);
+      const now = Date.now(), elapsed = now - chunkStart;
+
+      // 4s max or 600ms silence after 1.5s
+      if (elapsed >= 4000 && buf.length > 0) {
+        sendAudio(buf); buf = []; chunkStart = now; silStart = null;
+      } else if (rms < 0.01) {
+        if (!silStart) silStart = now;
+        if (now - silStart > 600 && elapsed >= 1500 && buf.length > 0) {
+          sendAudio(buf); buf = []; chunkStart = now; silStart = null;
+        }
+      } else { silStart = null; }
     };
-    src.connect(proc);proc.connect(actx.destination);
-    rec=true;
+
+    src.connect(proc); proc.connect(actx.destination);
+    rec = true;
     document.getElementById('recBtn').classList.add('on');
-    document.getElementById('dot').className='dot rec';
-    document.getElementById('st').textContent='recording';
-  } catch(e){alert('Mic access required.')}
+    document.getElementById('dot').className = 'dot rec';
+    document.getElementById('st').textContent = 'recording';
+  } catch(e) { alert('Microphone access required.'); }
 }
 
-function send(buf) { socket.emit('audio_chunk',{audio:new Uint8Array(new Int16Array(buf).buffer),side,sampleRate:actx.sampleRate}); }
+let sending = false;
+function sendAudio(buf) {
+  if (sending) return; // drop chunk if previous still processing
+  sending = true;
+  const bytes = new Uint8Array(new Int16Array(buf).buffer);
+  socket.emit('audio_chunk', { audio: bytes, side, sampleRate: actx.sampleRate }, () => { sending = false; });
+  // Fallback reset in case callback doesn't fire
+  setTimeout(() => { sending = false; }, 5000);
+}
 
 function stopRec() {
-  proc?.disconnect();src?.disconnect();actx?.close();
-  proc=src=actx=null;rec=false;
+  proc?.disconnect(); src?.disconnect(); actx?.close();
+  proc = src = actx = null; rec = false;
   document.getElementById('recBtn').classList.remove('on');
-  document.getElementById('dot').className='dot on';
-  document.getElementById('st').textContent='ready';
+  document.getElementById('dot').className = 'dot on';
+  document.getElementById('st').textContent = 'ready';
+}
+
+// Server sends transcribed text back
+socket.on('new_text', d => {
+  addTextToCanvas(d.side, d.text);
+});
+
+function addTextToCanvas(s, text) {
+  const canvas = document.getElementById('canvas');
+  const empty = canvas.querySelector('.empty');
+  if (empty) empty.remove();
+
+  let hdr = document.getElementById('hdr-'+s);
+  if (!hdr) {
+    hdr = document.createElement('div');
+    hdr.id = 'hdr-'+s;
+    hdr.className = 'side-hdr';
+    hdr.innerHTML = `<span class="side-tag ${s}">${document.getElementById(s==='a'?'nA':'nB').textContent}</span>`;
+    canvas.appendChild(hdr);
+  }
+
+  let container = document.getElementById('txt-'+s);
+  if (!container) {
+    container = document.createElement('span');
+    container.id = 'txt-'+s;
+    canvas.appendChild(container);
+  }
+
+  text.split(/\s+/).forEach(word => {
+    if (!word) return;
+    const span = document.createElement('span');
+    span.className = 'w';
+    span.textContent = word + ' ';
+    container.appendChild(span);
+  });
+  canvas.scrollTop = canvas.scrollHeight;
 }
 
 function verifyNow() { socket.emit('verify_now',{side}); }

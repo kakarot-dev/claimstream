@@ -13,7 +13,7 @@ Usage: python main.py
 
 import time
 import numpy as np
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 from mymodel import Transcriber, FactChecker
@@ -22,15 +22,14 @@ from debate import Debate
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "convoai"
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent", max_http_buffer_size=10*1024*1024)
 
 print("=" * 50)
 print("ConvoAI — Debate Fact Checker")
 print("=" * 50)
 
 print("\n[1/3] Whisper STT")
-transcriber = Transcriber(model_size="small", device="cpu")
-
+transcriber = Transcriber(model_size="base", device="cpu")
 print("\n[2/3] Wikipedia Evidence Retrieval")
 print("[3/3] DeBERTa NLI Verification")
 checker = FactChecker()
@@ -79,8 +78,15 @@ def on_set_active_side(data):
     debate.set_active_side(data.get("side", "a"))
 
 
+@socketio.on("check_text")
+def on_check_text(data):
+    """Receive text from browser Speech API."""
+    handle_text(data.get("text", ""), data.get("side", debate.active_side or "a"))
+
+
 @socketio.on("audio_chunk")
 def on_audio_chunk(data):
+    """Receive audio, transcribe with Whisper, process."""
     audio_raw = data.get("audio")
     side = data.get("side", debate.active_side or "a")
     if not isinstance(audio_raw, (bytes, bytearray)):
@@ -97,30 +103,42 @@ def on_audio_chunk(data):
         indices = indices[indices < len(samples)]
         audio_bytes = samples[indices].tobytes()
 
-    # Stage 1: Transcribe
-    raw = transcriber.transcribe_audio(audio_bytes)
-    if not raw:
+    text = transcriber.transcribe_audio(audio_bytes)
+    if text:
+        # Send transcribed text to frontend immediately
+        emit("new_text", {"side": side, "text": text})
+        handle_text(text, side)
+
+
+def handle_text(text, side):
+    """Common handler for text from either Speech API or Whisper."""
+    if not text:
         return
 
-    # Stage 2: Sanitize
-    clean = sanitize(raw)
+    clean = sanitize(text)
     if not clean or is_filler(clean):
         return
 
-    # Accumulate
     transcripts[side] = (transcripts[side] + " " + clean).strip()
-    emit("new_text", {"side": side, "text": clean})
+    print(f"[TEXT] side={side}: ...{transcripts[side][-60:]}")
 
-    # Auto-verify periodically
     now = time.time()
     new_chars = len(transcripts[side]) - last_verify_len[side]
     if new_chars > 40 and now - last_verify[side] > VERIFY_INTERVAL:
-        run_verify(side)
+        last_verify[side] = now  # set now to prevent re-trigger
+        socketio.start_background_task(run_verify_bg, side, request.sid)
 
 
 @socketio.on("verify_now")
 def on_verify_now(data):
-    run_verify(data.get("side", debate.active_side or "a"))
+    side = data.get("side", debate.active_side or "a")
+    socketio.start_background_task(run_verify_bg, side, request.sid)
+
+def run_verify_bg(side, sid):
+    """Run verification in background thread so it doesn't block audio."""
+    socketio.emit("verify_status", {"msg": "Verifying...", "active": True}, to=sid)
+    run_verify(side, sid)
+    socketio.emit("verify_status", {"msg": "", "active": False}, to=sid)
 
 
 @socketio.on("end_side")
@@ -153,24 +171,36 @@ def on_reset():
     emit("debate_reset", {})
 
 
-def run_verify(side):
-    """Run stages 3-5 on new transcript text."""
-    new_text = transcripts[side][last_verify_len[side]:]
-    if not new_text.strip() or len(new_text.split()) < 4:
+def run_verify(side, sid=None):
+    """Run stages 3-5 on full transcript, skip already-verified claims."""
+    import re as _re
+
+    full = transcripts[side]
+    if not full or len(full.split()) < 4:
         return
 
     last_verify[side] = time.time()
-    last_verify_len[side] = len(transcripts[side])
+    last_verify_len[side] = len(full)
 
-    # Stage 3: Extract claims (split into sentences)
-    import re
-    sentences = re.split(r'(?<=[.!?])\s+', new_text)
-    # Also treat the whole text as a claim if no punctuation
-    if len(sentences) == 1 and not any(new_text.rstrip().endswith(p) for p in '.!?'):
-        sentences = [new_text]
+    # Stage 3: Split full transcript into sentences
+    # Try punctuation first, fall back to splitting on common conjunctions
+    sentences = _re.split(r'(?<=[.!?])\s+', full)
+    if len(sentences) <= 1:
+        # No punctuation — split on "and", "but", "because", "also", long pauses
+        sentences = _re.split(r'\.\s+|\band\b\s+|\bbut\b\s+|\bbecause\b\s+|\balso\b\s+', full)
 
-    claims = [s.strip() for s in sentences if len(s.strip()) >= 15 and not is_filler(s)]
-    print(f"[VERIFY] side={side}, {len(claims)} claims from {len(new_text)} chars")
+    # Filter
+    NON_CLAIM = _re.compile(r'^(I\'|I am|I was|I will|I\'ll|I would|I think|I believe|Let me|See you|What do|How do|Thank|Hello|Hi |Hey |Bye|Good |Nice |So |Well )', _re.IGNORECASE)
+    already = {c["text"].lower() for c in verified_claims[side]}
+    claims = []
+    for s in sentences:
+        s = s.strip()
+        if len(s) < 15 or is_filler(s) or NON_CLAIM.match(s):
+            continue
+        if s.lower() in already:
+            continue
+        claims.append(s)
+    print(f"[VERIFY] side={side}, {len(claims)} claims from {len(full)} chars")
 
     for claim in claims:
         # Stages 4+5: Retrieve + Verify
@@ -192,7 +222,7 @@ def run_verify(side):
                 "message": result["reason"],
             }, side=side)
 
-        emit("highlight", {
+        socketio.emit("highlight", {
             "side": side,
             "claim": {
                 "text": claim,
@@ -201,8 +231,12 @@ def run_verify(side):
                 "reason": result["reason"],
             },
             "scores": {k: s.summary() for k, s in debate.sides.items()},
-        })
+        }, to=sid)
+
+    socketio.emit("verify_done", {"side": side}, to=sid)
 
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, debug=False)
+    import sys
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    socketio.run(app, host="0.0.0.0", port=port, debug=False)

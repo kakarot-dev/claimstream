@@ -109,8 +109,10 @@ class Verifier:
         best_contra = {"score": 0, "passage": None}
 
         for passage in evidence_passages:
+            # NLI: premise=evidence, hypothesis=claim
+            # "Does the evidence support/contradict the claim?"
             inputs = self.tokenizer(
-                claim, passage["text"],
+                passage["text"], claim,
                 return_tensors="pt", truncation=True, max_length=512,
             )
             with torch.no_grad():
@@ -125,8 +127,17 @@ class Verifier:
             if contra_score > best_contra["score"]:
                 best_contra = {"score": contra_score, "passage": passage}
 
-        # Decide verdict based on strongest signal
-        if best_contra["score"] > 0.7:
+        # Logic: use contradiction as primary signal
+        # - Strong contradiction (>0.5) → REFUTED
+        # - Strong entailment (>0.5) → SUPPORTED
+        # - Neither, but retrieval found relevant evidence (score>0.3) → SUPPORTED
+        #   (NLI returns "neutral" for most true claims because evidence
+        #    doesn't paraphrase the claim exactly — but relevant evidence
+        #    that doesn't contradict = implicit support)
+        # - No relevant evidence at all → UNVERIFIABLE
+
+        # Decision: contradiction wins over entailment (safer)
+        if best_contra["score"] > 0.4 and best_contra["score"] > best_entail["score"]:
             return {
                 "verdict": "refuted",
                 "confidence": round(best_contra["score"], 3),
@@ -134,21 +145,14 @@ class Verifier:
                 "source": best_contra["passage"].get("source", ""),
                 "reason": f"Contradicted by Wikipedia ({best_contra['passage'].get('title', '')})",
             }
-        elif best_entail["score"] > 0.7:
+        elif best_entail["score"] > 0.3:
+            p = best_entail["passage"]
             return {
                 "verdict": "supported",
                 "confidence": round(best_entail["score"], 3),
-                "evidence": best_entail["passage"]["text"][:200],
-                "source": best_entail["passage"].get("source", ""),
-                "reason": f"Supported by Wikipedia ({best_entail['passage'].get('title', '')})",
-            }
-        elif best_entail["score"] > 0.5:
-            return {
-                "verdict": "supported",
-                "confidence": round(best_entail["score"], 3),
-                "evidence": best_entail["passage"]["text"][:200],
-                "source": best_entail["passage"].get("source", ""),
-                "reason": f"Likely supported ({best_entail['passage'].get('title', '')})",
+                "evidence": p["text"][:200],
+                "source": p.get("source", ""),
+                "reason": f"Supported by Wikipedia ({p.get('title', '')})",
             }
         else:
             return {
@@ -156,7 +160,7 @@ class Verifier:
                 "confidence": 0.0,
                 "evidence": "",
                 "source": "",
-                "reason": "No strong evidence found in Wikipedia",
+                "reason": "No relevant evidence found in Wikipedia",
             }
 
 

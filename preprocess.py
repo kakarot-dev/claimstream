@@ -9,7 +9,8 @@ import re
 # Filler words to strip
 FILLERS = re.compile(
     r'\b(um+|uh+|ah+|er+|like|you know|i mean|basically|literally|'
-    r'so+|well|right|okay|ok)\b',
+    r'so+|well|right|okay|ok|thank you|thanks|hello|hi|hey|'
+    r'see you|let me|personally|what do you think)\b',
     re.IGNORECASE
 )
 

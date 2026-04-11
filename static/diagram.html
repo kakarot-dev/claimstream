@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { background: #0c0c10; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, 'Inter', sans-serif; }
+  svg { max-width: 900px; width: 100%; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#6c8cff"/></marker>
+    <filter id="glow"><feGaussianBlur stdDeviation="2" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" fill="#a5b4fc" font-size="18" font-weight="700">ConvoAI — NLP Pipeline</text>
+
+  <!-- Stage 1: Mic -->
+  <rect x="30" y="60" width="140" height="65" rx="10" fill="#1c1c22" stroke="#a5b4fc" stroke-width="1.5"/>
+  <text x="100" y="85" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="700">BROWSER</text>
+  <text x="100" y="102" text-anchor="middle" fill="#9ca3af" font-size="10">Mic → PCM 16kHz</text>
+  <text x="100" y="115" text-anchor="middle" fill="#52525b" font-size="9">WebSocket chunks</text>
+
+  <line x1="170" y1="92" x2="215" y2="92" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Stage 1: Whisper -->
+  <rect x="220" y="55" width="160" height="75" rx="10" fill="#1c1c22" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="300" y="75" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700">STAGE 1</text>
+  <text x="300" y="92" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Whisper STT</text>
+  <text x="300" y="107" text-anchor="middle" fill="#9ca3af" font-size="9">faster-whisper (small)</text>
+  <text x="300" y="120" text-anchor="middle" fill="#52525b" font-size="9">Audio → Raw Text</text>
+
+  <line x1="380" y1="92" x2="425" y2="92" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Stage 2: Sanitize -->
+  <rect x="430" y="55" width="160" height="75" rx="10" fill="#1c1c22" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="510" y="75" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">STAGE 2</text>
+  <text x="510" y="92" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Sanitization</text>
+  <text x="510" y="107" text-anchor="middle" fill="#9ca3af" font-size="9">Remove fillers (um, uh)</text>
+  <text x="510" y="120" text-anchor="middle" fill="#52525b" font-size="9">Fix caps, clean artifacts</text>
+
+  <line x1="590" y1="92" x2="635" y2="92" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Stage 3: Extract -->
+  <rect x="640" y="55" width="140" height="75" rx="10" fill="#1c1c22" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="710" y="75" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="700">STAGE 3</text>
+  <text x="710" y="92" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Claim Extraction</text>
+  <text x="710" y="107" text-anchor="middle" fill="#9ca3af" font-size="9">Split sentences</text>
+  <text x="710" y="120" text-anchor="middle" fill="#52525b" font-size="9">Filter opinions/filler</text>
+
+  <!-- Arrow down -->
+  <line x1="710" y1="130" x2="710" y2="175" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Canvas output (parallel) -->
+  <rect x="30" y="165" width="200" height="60" rx="10" fill="#1c1c22" stroke="#52525b" stroke-width="1" stroke-dasharray="4"/>
+  <text x="130" y="190" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="600">Live Canvas</text>
+  <text x="130" y="205" text-anchor="middle" fill="#52525b" font-size="9">Text animates in real-time</text>
+
+  <line x1="300" y1="130" x2="300" y2="155" stroke="#52525b" stroke-width="1" stroke-dasharray="3"/>
+  <line x1="300" y1="155" x2="230" y2="175" stroke="#52525b" stroke-width="1" stroke-dasharray="3" marker-end="url(#a)"/>
+
+  <!-- Stage 4: FAISS -->
+  <rect x="520" y="180" width="320" height="90" rx="10" fill="#1c1c22" stroke="#6c8cff" stroke-width="1.5"/>
+  <text x="680" y="200" text-anchor="middle" fill="#6c8cff" font-size="10" font-weight="700">STAGE 4 — EVIDENCE RETRIEVAL</text>
+  <text x="680" y="220" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">FAISS + Sentence-Transformer</text>
+  <text x="680" y="237" text-anchor="middle" fill="#9ca3af" font-size="9">all-MiniLM-L6-v2 encodes claim → vector</text>
+  <text x="680" y="252" text-anchor="middle" fill="#9ca3af" font-size="9">FAISS searches 11,101 Wikipedia passages</text>
+  <text x="680" y="265" text-anchor="middle" fill="#52525b" font-size="9">Returns top-5 evidence passages (&lt;1ms)</text>
+
+  <!-- Wikipedia DB -->
+  <rect x="30" y="270" width="200" height="55" rx="8" fill="#1c1c22" stroke="#6c8cff" stroke-width="1" stroke-dasharray="4"/>
+  <text x="130" y="293" text-anchor="middle" fill="#6c8cff" font-size="11" font-weight="600">Wikipedia Knowledge Base</text>
+  <text x="130" y="310" text-anchor="middle" fill="#52525b" font-size="9">11,101 passages • 108 articles • 16MB index</text>
+
+  <line x1="230" y1="295" x2="515" y2="240" stroke="#6c8cff" stroke-width="1" stroke-dasharray="3" marker-end="url(#a)"/>
+
+  <!-- Arrow down from Stage 4 -->
+  <line x1="680" y1="270" x2="680" y2="310" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Stage 5: NLI -->
+  <rect x="520" y="315" width="320" height="85" rx="10" fill="#1c1c22" stroke="#f87171" stroke-width="1.5"/>
+  <text x="680" y="335" text-anchor="middle" fill="#f87171" font-size="10" font-weight="700">STAGE 5 — NLI VERIFICATION</text>
+  <text x="680" y="355" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">DeBERTa-v3 (MNLI/FEVER/ANLI)</text>
+  <text x="680" y="372" text-anchor="middle" fill="#9ca3af" font-size="9">Claim vs Evidence → Entailment / Contradiction / Neutral</text>
+  <text x="680" y="387" text-anchor="middle" fill="#52525b" font-size="9">~100ms per claim-evidence pair</text>
+
+  <!-- Arrow down from Stage 5 -->
+  <line x1="680" y1="400" x2="680" y2="435" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Verdict -->
+  <rect x="540" y="440" width="280" height="70" rx="10" fill="#1c1c22" stroke="#fff" stroke-width="1.5"/>
+  <text x="680" y="462" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">VERDICT</text>
+  <text x="610" y="482" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="600">SUPPORTED</text>
+  <text x="680" y="482" text-anchor="middle" fill="#f87171" font-size="10" font-weight="600">REFUTED</text>
+  <text x="755" y="482" text-anchor="middle" fill="#52525b" font-size="10" font-weight="600">UNVERIFIABLE</text>
+  <text x="680" y="500" text-anchor="middle" fill="#52525b" font-size="9">Entail + true = ✓ | Contradict + true = ✗</text>
+
+  <!-- Arrow to highlights -->
+  <line x1="540" y1="475" x2="310" y2="475" stroke="#6c8cff" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Highlights -->
+  <rect x="30" y="445" width="275" height="65" rx="10" fill="#1c1c22" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="167" y="467" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Inline Highlights</text>
+  <text x="100" y="487" text-anchor="middle" fill="#4ade80" font-size="10">green = true</text>
+  <text x="215" y="487" text-anchor="middle" fill="#f87171" font-size="10">red box = false</text>
+  <text x="167" y="502" text-anchor="middle" fill="#52525b" font-size="9">Hover for evidence + reason</text>
+
+  <!-- Debate Tracker -->
+  <rect x="30" y="535" width="275" height="50" rx="10" fill="#1c1c22" stroke="#a5b4fc" stroke-width="1"/>
+  <text x="167" y="558" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="600">Debate Tracker</text>
+  <text x="167" y="575" text-anchor="middle" fill="#52525b" font-size="9">Accuracy % per side • Winner determination</text>
+
+  <line x1="167" y1="510" x2="167" y2="530" stroke="#6c8cff" stroke-width="1" marker-end="url(#a)"/>
+
+  <!-- Models box -->
+  <rect x="520" y="535" width="280" height="50" rx="8" fill="#1c1c22" stroke="#52525b" stroke-width="1"/>
+  <text x="660" y="555" text-anchor="middle" fill="#9ca3af" font-size="10" font-weight="600">All Models from HuggingFace • Runs Locally • No API</text>
+  <text x="660" y="572" text-anchor="middle" fill="#52525b" font-size="9">Whisper ~461MB | MiniLM ~80MB | DeBERTa ~350MB</text>
+
+</svg>
+</body>
+</html>
